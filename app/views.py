@@ -18,8 +18,8 @@ def wechat_auth():
         list1.sort()
         sha1=hashlib.sha1()
         map(sha1.update,list1)
-        #hashcode = unicode(sha1.hexdigest(), 'utf-8')
-        hashcode = sha1.hexdigest()
+        hashcode = unicode(sha1.hexdigest(), 'utf-8')
+        #hashcode = sha1.hexdigest()
         if hashcode == signature:
             print 'ok', echostr,type(echostr) 
             return echostr
