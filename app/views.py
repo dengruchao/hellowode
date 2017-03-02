@@ -17,6 +17,7 @@ def wechat_auth():
         sha1 = hashlib.sha1()
         map(sha1.update, s)
         hashcode = sha1.hexdigest()
+        print 'aaa', signature, hashcode
         if hashcode == signature:
             return make_response(echostr)
 
