@@ -4,9 +4,6 @@ from app import app
 from flask import request, make_response
 import hashlib
 import xml.etree.ElementTree as ET
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 @app.route('/',methods=['GET','POST'])
 def wechat_auth():
@@ -23,7 +20,7 @@ def wechat_auth():
         map(sha1.update,list1)
         hashcode = unicode(sha1.hexdigest(), 'utf-8')
         if hashcode == signature:
-            print 'ok', type(echostr)
+            print 'ok', echostr,make_response(echostr) 
             return make_response(echostr)
         else:
             return 'Hello World'
