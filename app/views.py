@@ -13,6 +13,8 @@ def wechat_auth():
         echostr = query.get('echostr', '')
         s = [timestamp, nonce, token]
         s.sort()
-        s = ''.join(s)
-        if hashlib.sha1(s).hexdigest() == signature:
+        sha1 = hashlib.sha1()
+        map(sha1.update, s)
+        hashcode = sha1.hexdigest()
+        if hashcode == signature:
             return make_response(echostr)
