@@ -2,7 +2,6 @@
 from app import app
 from flask import request, make_response
 import hashlib
-import sys
 
 @app.route('/', methods = ['GET', 'POST'])
 def wechat_auth():
@@ -18,7 +17,6 @@ def wechat_auth():
         sha1 = hashlib.sha1()
         map(sha1.update, s)
         hashcode = sha1.hexdigest()
-        sys.stdout('aaa'+signature+hashcode)
         if hashcode == signature:
             return make_response(echostr)
 

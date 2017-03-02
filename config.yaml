@@ -1,5 +1,2 @@
-name: contentbasedwechatmp
+name: hellowode
 version: 1
-handlers:
-- url: /static
-  static_dir: app/static
