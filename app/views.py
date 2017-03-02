@@ -32,6 +32,7 @@ def wechat_auth():
         if hashcode == signature:
             return echostr
         else:
+            print 'aaa', hashcode, signature
             return 'HEl'
     else:
         rec = request.stream.read()
