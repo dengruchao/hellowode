@@ -14,7 +14,6 @@ def wechat_auth():
         token='liusicong'
         data = request.args
         signature = data.get('signature','')
-        print 'signature', type(signature)
         timestamp = data.get('timestamp','')
         nonce = data.get('nonce','')
         echostr = data.get('echostr','')
@@ -23,9 +22,8 @@ def wechat_auth():
         sha1=hashlib.sha1()
         map(sha1.update,list1)
         hashcode = unicode(sha1.hexdigest(), 'utf-8')
-        print 'hashcode', type(hashcode)
         if hashcode == signature:
-            print 'ok'
+            print 'ok', type(echostr)
             return make_response(echostr)
         else:
             return 'Hello World'
