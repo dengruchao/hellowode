@@ -4,6 +4,9 @@ from app import app
 from flask import request, make_response
 import hashlib
 import xml.etree.ElementTree as ET
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 @app.route('/',methods=['GET','POST'])
 def wechat_auth():
@@ -28,7 +31,7 @@ def wechat_auth():
         sha1=hashlib.sha1()
         map(sha1.update,list1)
         hashcode=sha1.hexdigest()
-        print 'new', type(hashcode)
+        print 'new', type(hashcode.encode('utf-8'))
         #sha1加密算法        
 
         #如果是来自微信的请求，则回复echostr
