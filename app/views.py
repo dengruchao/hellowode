@@ -11,12 +11,14 @@ def wechat_auth():
         token='liusicong'
         data = request.args
         signature = data.get('signature','')
+        print 'signature', signature
         timestamp = data.get('timestamp','')
         nonce = data.get('nonce','')
         echostr = data.get('echostr','')
-        #s = [timestamp,nonce,token]
-        #s.sort()
-        #s = ''.join(s)
+        s = [timestamp,nonce,token]
+        s.sort()
+        s = ''.join(s)
+        print 'old', hashlib.sha1(s).hexdigest()
         #if (hashlib.sha1(s).hexdigest() == signature):
         #    return make_response(echostr)
         #else:
@@ -26,6 +28,7 @@ def wechat_auth():
         sha1=hashlib.sha1()
         map(sha1.update,list1)
         hashcode=sha1.hexdigest()
+        print 'new', hashcode
         #sha1加密算法        
 
         #如果是来自微信的请求，则回复echostr
