@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from app import app
 from flask import request, make_response
 import hashlib
@@ -18,3 +19,4 @@ def wechat_auth():
         hashcode = sha1.hexdigest()
         if hashcode == signature:
             return make_response(echostr)
+
