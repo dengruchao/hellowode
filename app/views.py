@@ -22,7 +22,9 @@ def wechat_auth():
         #hashcode = sha1.hexdigest()
         if hashcode == signature:
             print 'ok', echostr,type(echostr) 
-            return echostr
+            response = make_response(echostr)
+            response.content_type = 'text'
+            return response
         else:
             return 'Hello World'
     else:
