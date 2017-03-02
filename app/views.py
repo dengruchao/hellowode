@@ -18,27 +18,16 @@ def wechat_auth():
         timestamp = data.get('timestamp','')
         nonce = data.get('nonce','')
         echostr = data.get('echostr','')
-        s = [timestamp,nonce,token]
-        s.sort()
-        s = ''.join(s)
-        print 'old', type(hashlib.sha1(s).hexdigest())
-        #if (hashlib.sha1(s).hexdigest() == signature):
-        #    return make_response(echostr)
-        #else:
-        #    return 'Hello World'
         list1=[token,timestamp,nonce]
         list1.sort()
         sha1=hashlib.sha1()
         map(sha1.update,list1)
-        hashcode=sha1.hexdigest()
-        print 'new', type(hashcode.encode('utf-8'))
-        #sha1加密算法        
-
-        #如果是来自微信的请求，则回复echostr
+        hashcode = unicode(sha1.hexdigest(), 'utf-8')
+        print 'hashcode', type(hashcode)
         if hashcode == signature:
             return echostr
         else:
-            return 'HEl'
+            return 'Hello World'
     else:
         rec = request.stream.read()
         xml_rec = ET.fromstring(rec)
