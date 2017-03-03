@@ -27,16 +27,22 @@ def wechat_auth():
             return 'Hello World'
     else:
         rec = request.stream.read()
-        xml_rec = ET.fromstring(rec)
-        tou = xml_rec.find('ToUserName').text
-        fromu = xml_rec.find('FromUserName').text
-        content = xml_rec.find('Content').text
-        xml_rep = "<xml><ToUserName><![CDATA[%s]]></ToUserName>\
-                    <FromUserName><![CDATA[%s]]></FromUserName>\
-                    <CreateTime>%s</CreateTime>\
-                    <MsgType><![CDATA[text]]></MsgType>\
-                    <Content><![CDATA[%s]]></Content>\
-                    <FuncFlag>0</FuncFlag></xml>"
-        response = make_response(xml_rep % (fromu, tou, str(int(time.time())), content))
-        response.content_type = 'application/xml'
-        return response
+        xml_recv = ET.fromstring(rec)
+        toUserName = xml_recv.find('ToUserName').text
+        fromUserName = xml_recv.find('FromUserName').text
+        content = xml_recv.find('Content').text
+        if content == '文本':
+            textMsg(fromUserName, toUserName)
+
+def textMsg(fromUserName, toUserName):
+    xml_rep = "<xml>\
+                <ToUserName><![CDATA[%s]]></ToUserName>\
+                <FromUserName><![CDATA[%s]]></FromUserName>\
+                <CreateTime>%s</CreateTime>\
+                <MsgType><![CDATA[text]]></MsgType>\
+                <Content><![CDATA[%s]]></Content>\
+                <FuncFlag>0</FuncFlag>\
+                </xml>"
+    response = make_response(xml_rep % (fromUserName, toUserName, str(int(time.time())), content))
+    response.content_type = 'application/xml'
+    return response
