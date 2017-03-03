@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import time
 from app import app
 from flask import request, make_response
 import hashlib
 import xml.etree.ElementTree as ET
+from reply import reply
 
 @app.route('/', methods = ['GET', 'POST'])
 def wechat_auth():
@@ -28,29 +28,8 @@ def wechat_auth():
     else:
         rec = request.stream.read()
         xml_recv = ET.fromstring(rec)
-        toUserName = xml_recv.find('ToUserName').text
-        fromUserName = xml_recv.find('FromUserName').text
+        reply.toUserName = xml_recv.find('ToUserName').text
+        reply.fromUserName = xml_recv.find('FromUserName').text
         content = xml_recv.find('Content').text
-        if content == u'文本':
-            return textMsg(fromUserName, toUserName, content)
-        else:
-            return menu(fromUserName, toUserName)
+        reply.dispatch(content)
 
-def menu(fromUserName, toUserName):
-    content = u'''
-    请输入“文本”
-    '''
-    return textMsg(fromUserName, toUserName, content)
-
-def textMsg(fromUserName, toUserName, content):
-    xml_rep = "<xml>\
-                <ToUserName><![CDATA[%s]]></ToUserName>\
-                <FromUserName><![CDATA[%s]]></FromUserName>\
-                <CreateTime>%s</CreateTime>\
-                <MsgType><![CDATA[text]]></MsgType>\
-                <Content><![CDATA[%s]]></Content>\
-                <FuncFlag>0</FuncFlag>\
-                </xml>"
-    response = make_response(xml_rep % (fromUserName, toUserName, str(int(time.time())), content))
-    response.content_type = 'application/xml'
-    return response
