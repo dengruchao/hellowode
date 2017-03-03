@@ -13,7 +13,7 @@ class Reply:
 		return self.textMsg(content)
 
 	def textMsg(self, content):
-		xml_rep = "<xml>\
+		xml_resp = "<xml>\
 					<ToUserName><![CDATA[%s]]></ToUserName>\
 					<FromUserName><![CDATA[%s]]></FromUserName>\
 					<CreateTime>%s</CreateTime>\
@@ -21,16 +21,29 @@ class Reply:
 					<Content><![CDATA[%s]]></Content>\
 					<FuncFlag>0</FuncFlag>\
 					</xml>"
-		response = make_response(xml_rep % (self.fromUserName, self.toUserName, str(int(time.time())), content))
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), content))
 		response.content_type = 'application/xml'
 		return response
 
-	def imageMsg(self):
-		pass
+	def imageMsg(self, media_id):
+		xml_resp = '<xml>\
+					<ToUserName><![CDATA[toUser]]></ToUserName>\
+					<FromUserName><![CDATA[fromUser]]></FromUserName>\
+					<CreateTime>12345678</CreateTime>\
+					<MsgType><![CDATA[image]]></MsgType>\
+					<Image>\
+					<MediaId><![CDATA[media_id]]></MediaId>\
+					</Image>\
+					</xml>'
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), media_id))
+		response.content_type = 'application/xml'
+		return response
 
 	def dispatch(self, content):
 		if content == u'文本':
 			return self.textMsg(content)
+		elif content == u'图片':
+			return self.imageMsg('timg.jpg')
 		else:
 			return self.menu()
 
