@@ -36,17 +36,17 @@ class Reply:
 					<MediaId><![CDATA[media_id]]></MediaId>\
 					</Image>\
 					</xml>'
-		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), filename))
+		media_id = wechatInterface.addTempImg(filename)
+		print 'media_id', media_id
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), media_id))
 		response.content_type = 'application/xml'
 		return response
 
 	def dispatch(self, content):
 		if content == u'文本':
-			access_token, expires_in = wechatInterface.getAccessToken()
-			content = str(access_token) + str(expires_in)
 			return self.textMsg(content)
 		elif content == u'图片':
-			return self.imageMsg('timg.jpg')
+			return self.imageMsg('static/qrcode.jpg')
 		else:
 			return self.menu()
 
