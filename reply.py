@@ -10,7 +10,7 @@ class Reply:
 
 	def menu(self):
 		content = u'请输入“文本”'
-		return self.textMsg(self.fromUserName, self.toUserName, content)
+		return self.textMsg(content)
 
 	def textMsg(self, content):
 		xml_rep = "<xml>\
