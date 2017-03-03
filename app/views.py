@@ -31,7 +31,7 @@ def wechat_auth():
         toUserName = xml_recv.find('ToUserName').text
         fromUserName = xml_recv.find('FromUserName').text
         content = xml_recv.find('Content').text
-        if content == '文本':
+        if content == u'文本':
             textMsg(fromUserName, toUserName, content)
 
 def textMsg(fromUserName, toUserName, content):
