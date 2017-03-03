@@ -20,7 +20,7 @@ class WechatInterface:
 		self.get_token_time = time.time()
 
 	def checkAccessToken(self):
-		with open('access_token.txt', 'r') as f:
+		with open('./app/access_token.txt', 'r') as f:
 			data = f.readline()
 			if data == '':
 				self.getAccessToken()
