@@ -31,11 +31,16 @@ def wechat_auth():
         toUserName = xml_recv.find('ToUserName').text
         fromUserName = xml_recv.find('FromUserName').text
         content = xml_recv.find('Content').text
-        print content
         if content == u'文本':
             return textMsg(fromUserName, toUserName, content)
         else:
-            return make_response('error')
+            return menu(fromUserName, toUserName)
+
+def menu(fromUserName, toUserName):
+    content = u'''
+    请输入“文本”
+    '''
+    return textMsg(fromUserName, toUserName, content)
 
 def textMsg(fromUserName, toUserName, content):
     xml_rep = "<xml>\
