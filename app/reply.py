@@ -53,7 +53,7 @@ class Reply:
 					<MusicUrl><![CDATA[%s]]></MusicUrl>\
 					</Music>\
 					</xml>'
-		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), u'彩虹', 'nothing', link))
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), 'caihong', 'nothing', link))
 		response.content_type = 'application/xml'
 		return response
 
