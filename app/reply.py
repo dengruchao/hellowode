@@ -62,6 +62,7 @@ class Reply:
 			if content == u'文本':
 				return self.textMsg(content)
 			elif content == u'音乐':
+				print 'ok'
 				return self.musicMsg()
 		elif msgType == 'image':
 			return self.imageMsg(content)
