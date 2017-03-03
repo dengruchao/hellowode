@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import make_response
 import time
+from wechatInterface import wechatInterface
 
 class Reply:
 
@@ -25,7 +26,7 @@ class Reply:
 		response.content_type = 'application/xml'
 		return response
 
-	def imageMsg(self, media_id):
+	def imageMsg(self, filename):
 		xml_resp = '<xml>\
 					<ToUserName><![CDATA[toUser]]></ToUserName>\
 					<FromUserName><![CDATA[fromUser]]></FromUserName>\
@@ -35,12 +36,14 @@ class Reply:
 					<MediaId><![CDATA[media_id]]></MediaId>\
 					</Image>\
 					</xml>'
-		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), media_id))
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), filename))
 		response.content_type = 'application/xml'
 		return response
 
 	def dispatch(self, content):
 		if content == u'文本':
+			access_token, expires_in = wechatInterface.getAccessToken()
+			content = access_token + expires_in
 			return self.textMsg(content)
 		elif content == u'图片':
 			return self.imageMsg('timg.jpg')
