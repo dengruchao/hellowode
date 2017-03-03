@@ -34,7 +34,7 @@ def wechat_auth():
         if content == '文本':
             textMsg(fromUserName, toUserName)
 
-def textMsg(fromUserName, toUserName):
+def textMsg(fromUserName, toUserName, content):
     xml_rep = "<xml>\
                 <ToUserName><![CDATA[%s]]></ToUserName>\
                 <FromUserName><![CDATA[%s]]></FromUserName>\
