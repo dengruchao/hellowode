@@ -46,7 +46,7 @@ class Reply:
 		if content == u'文本':
 			return self.textMsg(content)
 		elif content == u'图片':
-			return self.imageMsg('static\qrcode.jpg')
+			return self.imageMsg('qrcode.jpg')
 		else:
 			return self.menu()
 
