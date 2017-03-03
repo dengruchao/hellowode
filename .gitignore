@@ -1,0 +1,4 @@
+*.pyc
+run.py
+.git/
+.idea/
