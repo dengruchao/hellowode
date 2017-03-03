@@ -31,5 +31,5 @@ def wechat_auth():
         reply.toUserName = xml_recv.find('ToUserName').text
         reply.fromUserName = xml_recv.find('FromUserName').text
         content = xml_recv.find('Content').text
-        reply.dispatch(content)
+        return reply.dispatch(content)
 
