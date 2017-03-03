@@ -43,7 +43,7 @@ class Reply:
 	def dispatch(self, content):
 		if content == u'文本':
 			access_token, expires_in = wechatInterface.getAccessToken()
-			content = access_token + expires_in
+			content = str(access_token) + str(expires_in)
 			return self.textMsg(content)
 		elif content == u'图片':
 			return self.imageMsg('timg.jpg')
