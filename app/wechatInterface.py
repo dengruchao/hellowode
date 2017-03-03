@@ -9,8 +9,6 @@ class WechatInterface:
 		self.appId = 'wx7e49057f2b9ea954'
 		self.secret = '37b4d4160ba04506f19958530c49a834'
 		self.base_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type={grant_type}&appid={appid}&secret={secret}'
-		print 'init'
-		self.getAccessToken()
 
 	def getAccessToken(self):
 		print 'get access token'
@@ -22,9 +20,23 @@ class WechatInterface:
 		self.get_token_time = time.time()
 
 	def checkAccessToken(self):
-		now_time = time.time()
-		if abs(now_time - self.get_token_time) > 7000:
-			self.getAccessToken()
+		with open('access_token.txt', 'r') as f:
+			data = f.readline()
+			if data == '':
+				self.getAccessToken()
+				f.write('%s %d %f' % (self.access_token, self.expires_in, self.get_token_time))
+			else:
+				result = data.split(' ')
+				access_token = result[0]
+				expires_in = result[1]
+				get_token_time = result[2]
+				now_time = time.time()
+				if abs(now_time - get_token_time) > expires_in:
+					self.getAccessToken()
+					f.write('%s %d %f' % (self.access_token, self.expires_in, self.get_token_time))
+				else:
+					self.access_token = access_token
+
 
 	def addTempImg(self, filename):
 		self.checkAccessToken()
