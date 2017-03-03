@@ -31,6 +31,7 @@ class WechatInterface:
 		payload_img = {'access_token': self.access_token, 'type': 'image'}
 		data = {'media': open(filename, 'rb')}
 		resp = requests.post(url=url, params=payload_img, files=data)
+		print resp
 		if resp.status_code == 200:
 			resp_json = json.loads(resp.content)
 			return resp_json['media_id']
