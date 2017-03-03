@@ -30,6 +30,10 @@ def wechat_auth():
         xml_recv = ET.fromstring(rec)
         reply.toUserName = xml_recv.find('ToUserName').text
         reply.fromUserName = xml_recv.find('FromUserName').text
-        content = xml_recv.find('Content').text
-        return reply.dispatch(content)
+        msgType = xml_recv.find('MsgType').text
+        if msgType == 'text':
+            content = xml_recv.find('Content').text
+        elif msgType == 'image':
+            content = xml_recv.find('MediaId').text
+        return reply.dispatch(msgType, content)
 
