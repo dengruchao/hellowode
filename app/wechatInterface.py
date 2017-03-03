@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-
+import pylibmc as memcache
 
 class WechatInterface:
 
@@ -11,35 +11,21 @@ class WechatInterface:
 		self.base_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type={grant_type}&appid={appid}&secret={secret}'
 
 	def getAccessToken(self):
-		print 'get access token'
-		url = self.base_url.format(grant_type='client_credential', appid=self.appId, secret=self.secret)
-		resp = requests.get(url)
-		resp_json = json.loads(resp.content)
-		self.access_token = resp_json['access_token']
-		self.expires_in = resp_json['expires_in']
-		self.get_token_time = time.time()
-
-	def checkAccessToken(self):
-		with open('./app/access_token.txt', 'r+') as f:
-			data = f.readline()
-			if data == '':
-				self.getAccessToken()
-				f.write('%s %d %f' % (self.access_token, self.expires_in, self.get_token_time))
-			else:
-				result = data.split(' ')
-				access_token = result[0]
-				expires_in = result[1]
-				get_token_time = result[2]
-				now_time = time.time()
-				if abs(now_time - get_token_time) > expires_in:
-					self.getAccessToken()
-					f.write('%s %d %f' % (self.access_token, self.expires_in, self.get_token_time))
-				else:
-					self.access_token = access_token
-
+		mc = memcache.Client()
+		token = mc.get('token')
+		if token == None:
+			print 'get access token'
+			url = self.base_url.format(grant_type='client_credential', appid=self.appId, secret=self.secret)
+			resp = requests.get(url)
+			resp_json = json.loads(resp.content)
+			access_token = resp_json['access_token']
+			expires_in = resp_json['expires_in']
+			mc.set('token', access_token, expires_in)
+			token = mc.get('token')
+		return token
 
 	def addTempImg(self, filename):
-		self.checkAccessToken()
+		self.getAccessToken()
 		url = "https://api.weixin.qq.com/cgi-bin/media/upload"
 		payload_img = {'access_token': self.access_token, 'type': 'image'}
 		data = {'media': open(filename, 'rb')}
