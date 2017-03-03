@@ -9,6 +9,7 @@ class WechatInterface:
 		self.appId = 'wx7e49057f2b9ea954'
 		self.secret = '37b4d4160ba04506f19958530c49a834'
 		self.base_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type={grant_type}&appid={appid}&secret={secret}'
+		print 'init'
 		self.getAccessToken()
 
 	def getAccessToken(self):
@@ -31,7 +32,7 @@ class WechatInterface:
 		payload_img = {'access_token': self.access_token, 'type': 'image'}
 		data = {'media': open(filename, 'rb')}
 		resp = requests.post(url=url, params=payload_img, files=data)
-		print resp
+		print resp.content
 		if resp.status_code == 200:
 			resp_json = json.loads(resp.content)
 			return resp_json['media_id']
