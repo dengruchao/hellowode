@@ -28,12 +28,12 @@ class Reply:
 
 	def imageMsg(self, media_id):
 		xml_resp = '<xml>\
-					<ToUserName><![CDATA[toUser]]></ToUserName>\
-					<FromUserName><![CDATA[fromUser]]></FromUserName>\
-					<CreateTime>12345678</CreateTime>\
+					<ToUserName><![CDATA[%s]]></ToUserName>\
+					<FromUserName><![CDATA[%s]]></FromUserName>\
+					<CreateTime>%s</CreateTime>\
 					<MsgType><![CDATA[image]]></MsgType>\
 					<Image>\
-					<MediaId><![CDATA[media_id]]></MediaId>\
+					<MediaId><![CDATA[%d]]></MediaId>\
 					</Image>\
 					</xml>'
 		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), media_id))
