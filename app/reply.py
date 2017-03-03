@@ -33,7 +33,7 @@ class Reply:
 					<CreateTime>%s</CreateTime>\
 					<MsgType><![CDATA[image]]></MsgType>\
 					<Image>\
-					<MediaId><![CDATA[%d]]></MediaId>\
+					<MediaId><![CDATA[%s]]></MediaId>\
 					</Image>\
 					</xml>'
 		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), media_id))
