@@ -12,6 +12,7 @@ class WechatInterface:
 		self.getAccessToken()
 
 	def getAccessToken(self):
+		print 'get access token'
 		url = self.base_url.format(grant_type='client_credential', appid=self.appId, secret=self.secret)
 		resp = requests.get(url)
 		resp_json = json.loads(resp.content)
@@ -25,6 +26,7 @@ class WechatInterface:
 			self.getAccessToken()
 
 	def addTempImg(self, filename):
+		self.checkAccessToken()
 		url = "https://api.weixin.qq.com/cgi-bin/media/upload"
 		payload_img = {'access_token': self.access_token, 'type': 'image'}
 		data = {'media': open(filename, 'rb')}
