@@ -39,36 +39,34 @@ class WechatInterface:
 		access_token = self.getAccessToken()
 		url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % access_token
 		payload = {
-     "button":[
-     {
-          "type":"click",
-          "name":u"今日歌曲",
-          "key":"V1001_TODAY_MUSIC"
-      },
-      {
-           "name":u"菜单",
-           "sub_button":[
-           {
-               "type":"view",
-               "name":u"搜索",
-               "url":"http://www.soso.com/"
-            },
-            {
-               "type":"view",
-               "name":u"视频",
-               "url":"http://v.qq.com/"
-            },
-            {
-               "type":"click",
-               "name":u"赞一下我们",
-               "key":"V1001_GOOD"
-            }]
-       }]
- }
+					"button":[
+						{
+							"type":"click",
+							"name":u"今日歌曲",
+							"key":"V1001_TODAY_MUSIC"
+						},
+						{
+							"name":u"菜单",
+							"sub_button":[
+							{
+								"type":"view",
+								"name":u"搜索",
+								"url":"http://www.soso.com/"
+							},
+							{
+								"type":"view",
+								"name":u"视频",
+								"url":"http://v.qq.com/"
+							},
+							{
+								"type":"click",
+								"name":u"赞一下我们",
+								"key":"V1001_GOOD"
+							}]
+						}]
+					}
 		resp = requests.post(url=url, params=payload)
-		print resp.content
 		if resp.status_code == 200:
 			print 'ok'
-			return resp.content
 
 wechatInterface = WechatInterface()

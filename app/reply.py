@@ -94,11 +94,6 @@ class Reply:
 				item_list = [[u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/01.jpg', 'http://www.baidu.com'],
 				             [u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/02.jpg', 'http://www.baidu.com']]
 				return self.imgTextMsg(item_list)
-			elif content == u'菜单':
-				content = wechatInterface.menuCreate()
-				response = make_response(content)
-				response.content_type = 'text'
-				return response
 		elif msgType == 'image':
 			return self.imageMsg(content)
 		else:
