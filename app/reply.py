@@ -111,6 +111,8 @@ class Reply:
 				img_url = 'http://imgsrc.baidu.com/forum/w=580/sign=deeeda7249c2d562f208d0e5d71090f3/618cd609b3de9c82b68e8d9d6a81800a18d84309.jpg'
 				item = [news['article'], news['source'], img_url, news['detailurl']]
 				item_list.append(item)
+				if len(item_list) == 10:
+					break
 			print item_list
 			return self.imgTextMsg(item_list)
 
