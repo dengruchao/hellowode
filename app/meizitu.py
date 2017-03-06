@@ -11,6 +11,7 @@ class Meizitu:
 		resp = requests.get(self.url)
 		page = resp.content
 		link = re.search('href="(.*?)".*?title="%s"' % tag, page, re.S)
+		print link
 		resp = requests.get(link)
 		page = resp.content
 		html = etree.HTML(page)
@@ -20,6 +21,7 @@ class Meizitu:
 			link_img = html.xpath('//*[@id="maincontent"]/div[1]/ul/li[%s]/div/div/a/img')[0]
 			name = html.xpath('//*[@id="maincontent"]/div[1]/ul/li[%s]/div/div/a/img/@alt' % i)[0]
 			articals.append([name, name, link_img, link])
+		print articals
 		return reply.imgTextMsg(articals)
 
 meizitu = Meizitu()
