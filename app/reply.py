@@ -8,7 +8,7 @@ class Reply:
 	def __init__(self):
 		self.fromUserName = None
 		self.toUserName = None
-		#wechatInterface.__init__()
+		wechatInterface.__init__()
 
 	def menu(self):
 		content = u'请输入“文本”'
