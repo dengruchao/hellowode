@@ -91,7 +91,8 @@ class Reply:
 			elif content == u'音乐':
 				return self.musicMsg()
 			elif content == u'图文':
-				item_list = [[u'图文', u'描述', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/01.jpg', 'http://www.baidu.com']]
+				item_list = [[u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/01.jpg', 'http://www.baidu.com'],
+				             [u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/02.jpg', 'http://www.baidu.com']]
 				return self.imgTextMsg(item_list)
 		elif msgType == 'image':
 			return self.imageMsg(content)
