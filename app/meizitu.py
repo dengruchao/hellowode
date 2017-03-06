@@ -12,10 +12,9 @@ class Meizitu:
 		resp.encoding = 'gb2312'
 		page = resp.text
 		pattern = 'href="(.*?)".*?title="%s"' % tag
-		print pattern
 		link = re.search(pattern, page, re.S)
-		print link
-		resp = requests.get(link)
+		print link.group(1)
+		resp = requests.get(link.group(1))
 		page = resp.content
 		html = etree.HTML(page)
 		articals = []
