@@ -108,6 +108,7 @@ class Reply:
 				if len(item_list) == 5:
 					break
 			return self.imgTextMsg(item_list)
+		elif code == 308000:
 
 	def dispatch(self, msgType, content):
 		if msgType == 'text':
