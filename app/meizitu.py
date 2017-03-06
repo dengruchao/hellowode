@@ -21,7 +21,7 @@ class Meizitu:
 		for i in range(10):
 			link_p = '//*[@id="maincontent"]/div[1]/ul/li[%d]/div/div/a/@href' % (i+1)
 			link = html.xpath(link_p)[0]
-			link_img_p = '//*[@id="maincontent"]/div[1]/ul/li[%d]/div/div/a/img' % (i+1)
+			link_img_p = '//*[@id="maincontent"]/div[1]/ul/li[%d]/div/div/a/img/@src' % (i+1)
 			link_img = html.xpath(link_img_p)[0]
 			name_p = '//*[@id="maincontent"]/div[1]/ul/li[%d]/div/div/a/img/@alt' % (i+1)
 			name = html.xpath(name_p)[0]
