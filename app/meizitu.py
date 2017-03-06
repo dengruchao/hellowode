@@ -28,7 +28,6 @@ class Meizitu:
 			name_p = '//*[@id="maincontent"]/div[1]/ul/li[%d]/div/div/a/img/@alt' % (i+1)
 			name = html.xpath(name_p)[0]
 			articals.append([name, name, link_img, link])
-		print articals
-		return self.reply.imgTextMsg(articals)
+		return articals
 
 meizitu = Meizitu()
