@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from reply import reply
+from reply import *
 from lxml import etree
 import re
 
 class Meizitu:
 	def __init__(self):
 		self.url = 'http://www.meizitu.com/'
+		self.reply = Reply()
 
 	def crawl(self, tag_index):
 		resp = requests.get(self.url)
@@ -28,6 +29,6 @@ class Meizitu:
 			name = html.xpath(name_p)[0]
 			articals.append([name, name, link_img, link])
 		print articals
-		return reply.imgTextMsg(articals)
+		return self.reply.imgTextMsg(articals)
 
 meizitu = Meizitu()
