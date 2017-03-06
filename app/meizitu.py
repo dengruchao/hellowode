@@ -6,7 +6,6 @@ import re
 class Meizitu:
 	def __init__(self):
 		self.url = 'http://www.meizitu.com/'
-		self.reply = Reply()
 
 	def crawl(self, tag_index):
 		resp = requests.get(self.url)
