@@ -104,8 +104,8 @@ class Reply:
 			item_list = []
 			for news in resp_json['list']:
 				resp2 = requests.get(news['detailurl'])
-				print resp2.content
-				html = etree.HTML(resp2.content)
+				print resp2.text
+				html = etree.HTML(resp2.text)
 				try:
 					img_url = html.xpath('//*[@id="artibody"]/div[1]/img/@src')[0]
 				except:
