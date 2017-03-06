@@ -51,9 +51,10 @@ class Reply:
 					<Title><![CDATA[%s]]></Title>\
 					<Description><![CDATA[%s]]></Description>\
 					<MusicUrl><![CDATA[%s]]></MusicUrl>\
+					<HQMusicUrl><![CDATA[%s]]></HQMusicUrl>\
 					</Music>\
 					</xml>'
-		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), 'caihong', 'nothing', link))
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), 'caihong', 'nothing', link, link))
 		response.content_type = 'application/xml'
 		return response
 
