@@ -14,7 +14,6 @@ class Meizitu:
 		html = etree.HTML(page)
 		path = '//*[@id="subcontent clearfix"]/div[2]/span/a[%d]/@href' % (tag_index+1)
 		tag_url = html.xpath(path)[0]
-		print tag_url
 		resp = requests.get(tag_url)
 		page = resp.content
 		html = etree.HTML(page)
