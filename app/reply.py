@@ -106,7 +106,7 @@ class Reply:
 				resp2 = requests.get(news['detailurl'])
 				html = etree.HTML(resp2.text)
 				try:
-					img_url = html.xpath('//*[@id="artibody"]/div[1]/img/@src')[0]
+					img_url = html.xpath('//*[@id="artibody"]/div[1]/img')
 					print img_url
 				except:
 					img_url = 'http://imgsrc.baidu.com/forum/w=580/sign=deeeda7249c2d562f208d0e5d71090f3/618cd609b3de9c82b68e8d9d6a81800a18d84309.jpg'
