@@ -106,8 +106,7 @@ class Reply:
 				return self.musicMsg()
 			elif content in self.tag_list:
 				articals = meizitu.crawl(self.tag_list.index(content))
-				print len(articals)
-				print articals[0][0], articals[0][1], articals[0][2], articals[0][3]
+				print articals
 				return self.imgTextMsg(articals)
 			else:
 				return self.tulingRobot(content)
