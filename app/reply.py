@@ -105,8 +105,9 @@ class Reply:
 			elif content == u'音乐':
 				return self.musicMsg()
 			elif content in self.tag_list:
-				#articals = meizitu.crawl(self.tag_list.index(content))
-				articals = [[u'难以抗拒你的红唇', u'哈哈', 'http://mm.howkuai.com/wp-content/upload/2017a/02/05/limg.jpg', 'http://www.meizitu.com/a/5497.html']]
+				articals = meizitu.crawl(self.tag_list.index(content))
+				articals2 = [[u'难以抗拒你的红唇', u'难以抗拒你的红唇', 'http://mm.howkuai.com/wp-content/upload/2017a/02/05/limg.jpg', 'http://www.meizitu.com/a/5497.html']]
+				print articals == articals2
 				return self.imgTextMsg(articals)
 			else:
 				return self.tulingRobot(content)
