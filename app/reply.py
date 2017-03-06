@@ -92,7 +92,7 @@ class Reply:
 
 	def tulingRobot(self,content):
 		url = 'http://www.tuling123.com/openapi/api'
-		data = {'key': 'db0b623ae0dd4e9ca28a89174abe156c', 'info': content, 'loc': '', 'userid': ''}
+		data = {'key': 'db0b623ae0dd4e9ca28a89174abe156c', 'info': content, 'loc': '', 'userid': '123456'}
 		resp = requests.post(url, data=data)
 		resp_json = json.loads(resp.content)
 		#if resp_json['code'] == 100000:
