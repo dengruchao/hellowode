@@ -93,8 +93,8 @@ class Reply:
 		data = {'key': 'db0b623ae0dd4e9ca28a89274abe156c', 'info': content, 'loc': '', 'userid': ''}
 		resp = requests.post(url, data=data)
 		resp_json = json.loads(resp.content)
-		#if resp_json['code'] == 100000:
-		return self.textMsg(resp_json['text'])
+		if resp_json['code'] == 100000:
+			return self.textMsg(resp_json['text'])
 
 	def dispatch(self, msgType, content):
 		if msgType == 'text':
