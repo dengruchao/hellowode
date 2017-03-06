@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import make_response
 import time
-from wechatInterface import wechatInterface
+from wechatInterface import *
 
 class Reply:
 
@@ -88,6 +88,14 @@ class Reply:
 		content = u'欢迎来到邓小超的微信公众号'
 		return self.textMsg(content)
 
+	def tulingRobot(self,content):
+		url = 'http://www.tuling123.com/openapi/api'
+		data = {'key': 'db0b623ae0dd4e9ca28a89174abe156c', 'info': content, 'loc': '', 'userid': ''}
+		resp = requests.post(url, data=data)
+		resp_json = json.loads(resp.content)
+		if resp_json['code'] == 100000:
+			return self.textMsg(resp_json['text'])
+
 	def dispatch(self, msgType, content):
 		if msgType == 'text':
 			if content == u'文本':
@@ -98,6 +106,8 @@ class Reply:
 				item_list = [[u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/01.jpg', 'http://www.baidu.com'],
 				             [u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/02.jpg', 'http://www.baidu.com']]
 				return self.imgTextMsg(item_list)
+			else:
+				return self.tulingRobot(content)
 		elif msgType == 'image':
 			return self.imageMsg(content)
 		elif msgType == 'event':
