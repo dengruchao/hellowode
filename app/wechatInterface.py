@@ -66,6 +66,7 @@ class WechatInterface:
        }]
  }
 		resp = requests.post(url=url, params=payload)
+		print resp.content
 		if resp.status_code == 200:
 			print 'ok'
 			return resp.content
