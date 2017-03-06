@@ -10,7 +10,9 @@ class Meizitu:
 	def crawl(self, tag):
 		resp = requests.get(self.url)
 		page = resp.content
-		link = re.search('href="(.*?)".*?title="%s"' % tag, page, re.S)
+		pattern = 'href="(.*?)".*?title="%s"' % tag
+		print pattern
+		link = re.search(pattern, page, re.S)
 		print link
 		resp = requests.get(link)
 		page = resp.content
