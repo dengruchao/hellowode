@@ -109,6 +109,13 @@ class Reply:
 					break
 			return self.imgTextMsg(item_list)
 		elif code == 308000:
+			item_list = []
+			for menu in resp_json['list']:
+				item = [menu['article'], menu['source'], menu['icon'], menu['detailurl']]
+				item_list.append(item)
+				if len(item_list) == 5:
+					break
+			return self.imgTextMsg(item_list)
 
 	def dispatch(self, msgType, content):
 		if msgType == 'text':
