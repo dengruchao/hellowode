@@ -8,6 +8,7 @@ class WechatInterface:
 		self.appId = 'wx7e49057f2b9ea954'
 		self.secret = '37b4d4160ba04506f19958530c49a834'
 		self.base_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type={grant_type}&appid={appid}&secret={secret}'
+		self.menuCreate()
 
 	def getAccessToken(self):
 		mc = memcache.Client()
@@ -33,5 +34,40 @@ class WechatInterface:
 		if resp.status_code == 200:
 			resp_json = json.loads(resp.content)
 			return resp_json['media_id']
+
+	def menuCreate(self):
+		access_token = self.getAccessToken()
+		url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % access_token
+		payload = {
+     "button":[
+     {
+          "type":"click",
+          "name":u"今日歌曲",
+          "key":"V1001_TODAY_MUSIC"
+      },
+      {
+           "name":u"菜单",
+           "sub_button":[
+           {
+               "type":"view",
+               "name":u"搜索",
+               "url":"http://www.soso.com/"
+            },
+            {
+               "type":"view",
+               "name":u"视频",
+               "url":"http://v.qq.com/"
+            },
+            {
+               "type":"click",
+               "name":u"赞一下我们",
+               "key":"V1001_GOOD"
+            }]
+       }]
+ }
+		resp = requests.post(url=url, params=payload)
+		print resp.content
+		if resp.status_code == 200:
+			print 'ok'
 
 wechatInterface = WechatInterface()
