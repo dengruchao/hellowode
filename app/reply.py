@@ -8,7 +8,6 @@ class Reply:
 	def __init__(self):
 		self.fromUserName = None
 		self.toUserName = None
-		wechatInterface.__init__()
 
 	def menu(self):
 		content = u'请输入“文本”'
@@ -95,6 +94,8 @@ class Reply:
 				item_list = [[u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/01.jpg', 'http://www.baidu.com'],
 				             [u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/02.jpg', 'http://www.baidu.com']]
 				return self.imgTextMsg(item_list)
+			elif content == u'菜单':
+				wechatInterface.menuCreate()
 		elif msgType == 'image':
 			return self.imageMsg(content)
 		else:
