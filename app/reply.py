@@ -103,12 +103,12 @@ class Reply:
 		elif code == 302000:
 			item_list = []
 			for news in resp_json['list']:
-				#resp2 = requests.get(news['detailurl'])
-				#html = etree.HTML(resp2.content)
-				#try:
-				#	img_url = html.xpath('//*[@id="endText"]/p[1]/img/@src')[0]
-				#except:
-				img_url = 'http://imgsrc.baidu.com/forum/w=580/sign=deeeda7249c2d562f208d0e5d71090f3/618cd609b3de9c82b68e8d9d6a81800a18d84309.jpg'
+				resp2 = requests.get(news['detailurl'])
+				html = etree.HTML(resp2.content)
+				try:
+					img_url = html.xpath('//*[@id="endText"]/p[1]/img/@src')[0]
+				except:
+					img_url = 'http://imgsrc.baidu.com/forum/w=580/sign=deeeda7249c2d562f208d0e5d71090f3/618cd609b3de9c82b68e8d9d6a81800a18d84309.jpg'
 				item = [news['article'], news['source'], img_url, news['detailurl']]
 				item_list.append(item)
 				if len(item_list) == 5:
