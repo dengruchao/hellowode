@@ -84,6 +84,10 @@ class Reply:
 		response.content_type = 'application/xml'
 		return response
 
+	def subscribe(self):
+		content = u'欢迎来到邓小超的微信公众号'
+		return self.textMsg(content)
+
 	def dispatch(self, msgType, content):
 		if msgType == 'text':
 			if content == u'文本':
@@ -96,6 +100,8 @@ class Reply:
 				return self.imgTextMsg(item_list)
 		elif msgType == 'image':
 			return self.imageMsg(content)
+		elif msgType == 'event':
+			return self.subscribe()
 		else:
 			return self.menu()
 

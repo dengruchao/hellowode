@@ -35,5 +35,7 @@ def wechat_auth():
             content = xml_recv.find('Content').text
         elif msgType == 'image':
             content = xml_recv.find('MediaId').text
+        elif msgType == 'event':
+            content = xml_recv.find('Event').text
         return reply.dispatch(msgType, content)
 
