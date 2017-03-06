@@ -7,14 +7,14 @@ class Meizitu:
 	def __init__(self):
 		self.url = 'http://www.meizitu.com/'
 
-	def crawl(self, tag):
+	def crawl(self, tag_index):
 		resp = requests.get(self.url)
 		resp.encoding = 'gb2312'
 		page = resp.text
-		pattern = '<span>.*?href="(.*?)".*?target="_blank".*?title="%s"' % tag
-		link = re.search(pattern, page, re.S)
-		print link.group(1)
-		resp = requests.get(link.group(1))
+		html = etree.HTML(page)
+		tag_url = html.xpath('//*[@id="subcontent clearfix"]/div[2]/span/a[%d]/@href' % tag_index)
+		print tag_url
+		resp = requests.get(tag_url)
 		page = resp.content
 		html = etree.HTML(page)
 		articals = []
