@@ -54,7 +54,33 @@ class Reply:
 					<HQMusicUrl><![CDATA[%s]]></HQMusicUrl>\
 					</Music>\
 					</xml>'
-		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), 'caihong', 'nothing', link, link))
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), u'最炫民族风', u'歌手：凤凰传奇', link, link))
+		response.content_type = 'application/xml'
+		return response
+
+	def imgTextMsg(self, item_list):
+		item_fmt = '<item>\
+					<Title><![CDATA[%s]]></Title>\
+					<Description><![CDATA[%s]]></Description>\
+					<PicUrl><![CDATA[%s]]></PicUrl>\
+					<Url><![CDATA[%s]]></Url>\
+					</item>'
+		item_xml_list = []
+		for item in item_list:
+			item_xml = item_fmt % (item[0], item[1], item[2], item[3])
+			item_xml_list.append(item_xml)
+
+		xml_resp = '<xml>\
+					<ToUserName><![CDATA[%s]]></ToUserName>\
+					<FromUserName><![CDATA[%s]]></FromUserName>\
+					<CreateTime>%s</CreateTime>\
+					<MsgType><![CDATA[news]]></MsgType>\
+					<ArticleCount>%d</ArticleCount>\
+					<Articles>\
+					%s\
+					</Articles>\
+					</xml>'
+		response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), len(item_list), '\n'.join(item_xml_list)))
 		response.content_type = 'application/xml'
 		return response
 
@@ -63,8 +89,10 @@ class Reply:
 			if content == u'文本':
 				return self.textMsg(content)
 			elif content == u'音乐':
-				print 'ok'
 				return self.musicMsg()
+			elif content == u'图文':
+				item_list = [[u'图文', u'描述', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/01.jpg', 'http://www.baidu.com']]
+				return self.imgTextMsg(item_list)
 		elif msgType == 'image':
 			return self.imageMsg(content)
 		else:
