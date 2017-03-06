@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from reply import *
+from reply import reply
 from lxml import etree
 import re
 
