@@ -96,8 +96,8 @@ class Reply:
 		resp = requests.post(url, data=data)
 		resp_json = json.loads(resp.content)
         code = resp_json['code']
-		if code == 100000:
-		    return self.textMsg(resp_json['text'])
+        if code == 100000:
+            return self.textMsg(resp_json['text'])
         elif code == 200000:
             return self.textMsg(resp_json['text']+'\n'+resp_json['url'])
 
