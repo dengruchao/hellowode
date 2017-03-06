@@ -99,7 +99,7 @@ class Reply:
 		if code == 100000:
 		    return self.textMsg(resp_json['text'])
         elif code == 200000:
-		    return self.textMsg(resp_json['text']+'\n'+resp_json['url'])
+            return self.textMsg(resp_json['text']+'\n'+resp_json['url'])
 
 	def dispatch(self, msgType, content):
 		if msgType == 'text':
