@@ -41,7 +41,7 @@ class Reply:
 		return response
 
 	def musicMsg(self):
-		link = 'http://m10.music.126.net/20170303190437/7577ba21915fffd1d3b2bdc098d0950b/ymusic/47fe/b7b0/059b/1527f518027a60ede32fd42f8f1762ab.mp3'
+		link = 'http://m10.music.126.net/20170306115907/a44ca30df0eda6a21b66137f20d8ed4a/ymusic/fa90/df9c/59f7/95c4a2802e0b9191ae1a048f127e53c5.mp3'
 		xml_resp = '<xml>\
 					<ToUserName><![CDATA[%s]]></ToUserName>\
 					<FromUserName><![CDATA[%s]]></FromUserName>\
