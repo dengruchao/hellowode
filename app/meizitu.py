@@ -9,7 +9,8 @@ class Meizitu:
 
 	def crawl(self, tag):
 		resp = requests.get(self.url)
-		page = resp.content
+		resp.encoding = 'gb2312'
+		page = resp.text
 		pattern = 'href="(.*?)".*?title="%s"' % tag
 		print pattern
 		link = re.search(pattern, page, re.S)
