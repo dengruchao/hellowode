@@ -2,6 +2,7 @@
 from flask import make_response
 import time
 from wechatInterface import *
+from meizitu import *
 
 class Reply:
 
@@ -102,10 +103,8 @@ class Reply:
 				return self.textMsg(content)
 			elif content == u'音乐':
 				return self.musicMsg()
-			elif content == u'图文':
-				item_list = [[u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/01.jpg', 'http://www.baidu.com'],
-				             [u'一大波美女即将来袭', u'纯美的女子，结白的内衣写真', 'http://mm.howkuai.com/wp-content/uploads/2017a/03/01/02.jpg', 'http://www.baidu.com']]
-				return self.imgTextMsg(item_list)
+			elif content in [u'性感', u'浴室', u'私房', u'美腿', u'清纯', u'甜美', u'治愈系', u'萌妹子', u'小清新', u'女神', u'气质美女', u'嫩模', u'车模', u'比基尼', u'足球宝贝', u'萝莉', u'90后', u'日韩美女']:
+				return meizitu.crawl(content)
 			else:
 				return self.tulingRobot(content)
 		elif msgType == 'image':
