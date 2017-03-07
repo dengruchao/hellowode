@@ -5,6 +5,7 @@ from lxml import etree
 class Meizitu:
     def __init__(self):
         self.url = 'http://www.mmjpg.com/'
+        self.tag_list = [u'性感', u'小清新', u'刘飞儿', u'可儿', u'美胸', u'美臀', u'萌妹', u'ROSI', u'推女神', u'内衣', u'美腿']
 
     def crawl(self, tag_index):
         resp = requests.get(self.url)

@@ -9,7 +9,6 @@ class Reply:
     def __init__(self):
         self.fromUserName = None
         self.toUserName = None
-        self.tag_list = [u'性感', u'小清新', u'刘飞儿', u'可儿', u'美胸', u'美臀', u'萌妹', u'ROSI', u'推女神', u'内衣', u'美腿']
 
     def menu(self):
         content = u'你好，我现在还不知道怎么处理这个消息'
@@ -124,7 +123,7 @@ class Reply:
                 return self.textMsg(content)
             elif content == u'音乐':
                 return self.musicMsg()
-            elif content in self.tag_list:
+            elif content in meizitu.tag_list:
                 articals = meizitu.crawl(self.tag_list.index(content))
                 return self.imgTextMsg(articals)
             else:
