@@ -9,7 +9,7 @@ class Reply:
     def __init__(self):
         self.fromUserName = None
         self.toUserName = None
-        self.tag_list = [u'性感', u'浴室', u'私房', u'美腿', u'清纯', u'甜美', u'治愈系', u'萌妹子', u'小清新', u'女神', u'气质美女', u'嫩模', u'车模', u'比基尼', u'足球宝贝', u'萝莉', u'90后', u'日韩美女']
+        self.tag_list = [u'性感', u'小清新', u'刘飞儿', u'可儿', u'美胸', u'美臀', u'萌妹', u'ROSI', u'推女神', u'内衣', u'美腿']
 
     def menu(self):
         content = u'你好，我现在还不知道怎么处理这个消息'
@@ -125,8 +125,7 @@ class Reply:
             elif content == u'音乐':
                 return self.musicMsg()
             elif content in self.tag_list:
-                #articals = meizitu.crawl(self.tag_list.index(content))
-                articals = [['a', 'b', 'http://www.baidu.com', 'http://www.mmjpg.com/mm/913']]
+                articals = meizitu.crawl(self.tag_list.index(content))
                 return self.imgTextMsg(articals)
             else:
                 return self.tulingRobot(content)
