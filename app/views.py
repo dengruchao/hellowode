@@ -8,7 +8,7 @@ from reply import reply
 @app.route('/', methods = ['GET', 'POST'])
 def wechat_auth():
     if request.method == 'GET':
-        token ='liusicong'
+        token ='dengruchao'
         data = request.args
         signature = data.get('signature', '')
         timestamp = data.get('timestamp', '')
