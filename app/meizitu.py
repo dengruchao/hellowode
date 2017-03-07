@@ -16,10 +16,8 @@ class Meizitu:
         path = '/html/body/div[1]/div[3]/a[%d]/@href' % (tag_index+1)
         tag_url = html.xpath(path)[0]
         resp = requests.get(tag_url)
-        page = resp.content
-        html = etree.HTML(page)
-        page_count = html.xpath('/html/body/div[3]/div[1]/div[2]/em[1]/text()')[0]
-        result = re.search('(\d+)', page_count)
+        page = resp.text
+        result = re.search(u'共(\d+)页', page)
         page_count = result.group(1)
         nPage = random.randint(1, int(page_count))
         tag_url = tag_url + '/' + str(nPage)
