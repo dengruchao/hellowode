@@ -17,6 +17,7 @@ class Meizitu:
         tag_url = html.xpath(path)[0]
         resp = requests.get(tag_url)
         page = resp.text
+        print page
         result = re.search(u'共(\d+)页', page)
         page_count = result.group(1)
         nPage = random.randint(1, int(page_count))
