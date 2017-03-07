@@ -16,6 +16,7 @@ class Meizitu:
         path = '/html/body/div[1]/div[3]/a[%d]/@href' % (tag_index+1)
         tag_url = html.xpath(path)[0]
         resp = requests.get(tag_url)
+        resp.encoding = 'gb2312'
         page = resp.text
         print page
         result = re.search(u'共(\d+)页', page)
