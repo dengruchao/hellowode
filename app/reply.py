@@ -120,6 +120,7 @@ class Reply:
     def dispatch(self, msgType, content):
         if msgType == 'text':
             if content == u'文本':
+                print 'ok'
                 return self.textMsg(content)
             elif content == u'音乐':
                 return self.musicMsg()
