@@ -124,7 +124,7 @@ class Reply:
             elif content == u'音乐':
                 return self.musicMsg()
             elif content in meizitu.tag_list:
-                articals = meizitu.crawl(self.tag_list.index(content))
+                articals = meizitu.crawl(meizitu.tag_list.index(content))
                 return self.imgTextMsg(articals)
             else:
                 return self.tulingRobot(content)
