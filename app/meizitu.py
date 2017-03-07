@@ -21,7 +21,7 @@ class Meizitu:
         page_count = html.xpath('/html/body/div[3]/div[1]/div[2]/em[1]/text()')[0]
         result = re.search('(\d+)', page_count)
         page_count = result.group(1)
-        nPage = random.randint(1, page_count)
+        nPage = random.randint(1, int(page_count))
         path = path + '/' + nPage
         print path
         tag_url = html.xpath(path)[0]
