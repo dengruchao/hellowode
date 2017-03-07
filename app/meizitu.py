@@ -17,7 +17,6 @@ class Meizitu:
         tag_url = html.xpath(path)[0]
         resp = requests.get(tag_url)
         page = resp.content
-        print page
         result = re.search('class="page.*?class="info.*?(\d+).*?</em>', page)
         page_count = result.group(1)
         nPage = random.randint(1, int(page_count))
@@ -27,6 +26,7 @@ class Meizitu:
         html = etree.HTML(page)
         articals = []
         num = len(html.xpath('/html/body/div[3]/div[1]/ul/li'))
+        print num
         if num > 8:
             length = 8
         else:
