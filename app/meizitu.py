@@ -23,7 +23,6 @@ class Meizitu:
         page_count = result.group(1)
         nPage = random.randint(1, int(page_count))
         tag_url = tag_url + '/' + str(nPage)
-        print tag_url
         resp = requests.get(tag_url)
         page = resp.content
         html = etree.HTML(page)
