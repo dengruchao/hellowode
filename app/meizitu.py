@@ -17,7 +17,7 @@ class Meizitu:
         page = resp.content
         html = etree.HTML(page)
         articals = []
-        for i in range(2):
+        for i in range(5):
             link_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/@href' % (i+1)
             link = html.xpath(link_p)[0]
             link_img_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/img/@src' % (i+1)
