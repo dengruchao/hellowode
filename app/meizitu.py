@@ -19,6 +19,7 @@ class Meizitu:
         html = etree.HTML(page)
         articals = []
         num = len(html.xpath('/html/body/div[3]/div[1]/ul/li'))
+        print num
         if num > 8:
             length = 8
         for i in range(length):
