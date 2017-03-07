@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 from lxml import etree
+import random
 
 class Meizitu:
     def __init__(self):
@@ -17,12 +18,16 @@ class Meizitu:
         page = resp.content
         html = etree.HTML(page)
         articals = []
-        for i in range(8):
-            link_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/@href' % (i+1)
+        num = len(html.xpath('/html/body/div[3]/div[1]/ul/li'))
+        if num > 8:
+            length = 8
+        for i in range(length):
+            n = random.randint(0, num)
+            link_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/@href' % (n+1)
             link = html.xpath(link_p)[0]
-            link_img_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/img/@src' % (i+1)
+            link_img_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/img/@src' % (n+1)
             link_img = html.xpath(link_img_p)[0]
-            name_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/img/@alt' % (i+1)
+            name_p = '/html/body/div[3]/div[1]/ul/li[%d]/a/img/@alt' % (n+1)
             name = html.xpath(name_p)[0]
             articals.append([name, name, link_img, link])
         return articals
