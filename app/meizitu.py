@@ -22,9 +22,8 @@ class Meizitu:
         result = re.search('(\d+)', page_count)
         page_count = result.group(1)
         nPage = random.randint(1, int(page_count))
-        path = path + '/' + str(nPage)
-        print path
-        tag_url = html.xpath(path)[0]
+        tag_url = tag_url + '/' + str(nPage)
+        print tag_url
         resp = requests.get(tag_url)
         page = resp.content
         html = etree.HTML(page)
