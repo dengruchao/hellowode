@@ -126,6 +126,7 @@ class Reply:
                 return self.musicMsg()
             elif content in self.tag_list:
                 articals = meizitu.crawl(self.tag_list.index(content))
+                articals = [['a', 'b', 'http://www.baidu.com', 'http://www.mmjpg.com']]
                 return self.imgTextMsg(articals)
             else:
                 return self.tulingRobot(content)
