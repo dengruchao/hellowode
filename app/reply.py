@@ -12,7 +12,7 @@ class Reply:
         self.tag_list = [u'性感', u'浴室', u'私房', u'美腿', u'清纯', u'甜美', u'治愈系', u'萌妹子', u'小清新', u'女神', u'气质美女', u'嫩模', u'车模', u'比基尼', u'足球宝贝', u'萝莉', u'90后', u'日韩美女']
 
     def menu(self):
-        content = u'请输入“文本”'
+        content = u'你好，我现在还不知道怎么处理这个消息'
         return self.textMsg(content)
 
     def textMsg(self, content):

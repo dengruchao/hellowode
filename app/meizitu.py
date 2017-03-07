@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from reply import *
+import requests
 from lxml import etree
-import re
 
 class Meizitu:
     def __init__(self):
