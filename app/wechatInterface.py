@@ -54,7 +54,7 @@ class WechatInterface:
     def menuCreate(self):
         access_token = self.getAccessToken()
         url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % access_token
-        payload = {
+        data = {
                     "button":[
                         {
                             "type":"click",
@@ -81,8 +81,8 @@ class WechatInterface:
                             }]
                         }]
                     }
-        resp = requests.post(url=url, params=payload)
+        resp = requests.post(url=url, data=data)
         if resp.status_code == 200:
-            print 'ok'
+            print resp.content
 
 wechatInterface = WechatInterface()
