@@ -15,6 +15,7 @@ class WechatInterface:
     def getAccessToken(self):
         mc = memcache.Client()
         token = mc.get('token')
+        token = None
         if token == None:
             print 'get access token'
             url = self.base_url.format(grant_type='client_credential', appid=self.appId, secret=self.secret)
