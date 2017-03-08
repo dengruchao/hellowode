@@ -123,6 +123,7 @@ class Reply:
             elif content == u'音乐':
                 return self.musicMsg()
             elif content == u'二维码':
+                print self.fromUserName
                 media_id = wechatInterface.addMedia('app/static/qrcode.jpg', 'image', 0)
                 return self.imageMsg(media_id)
             elif content in meizitu.tag_list:
