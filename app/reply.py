@@ -119,10 +119,12 @@ class Reply:
     def dispatch(self, msgType, content):
         if msgType == 'text':
             if content == u'文本':
-                print 'ok'
                 return self.textMsg(content)
             elif content == u'音乐':
                 return self.musicMsg()
+            elif content == u'二维码':
+                media_id = wechatInterface.addTempMedia('app/static/qrcode.jpg', 'image')
+                return self.imageMsg(media_id)
             elif content in meizitu.tag_list:
                 articals = meizitu.crawl(meizitu.tag_list.index(content))
                 return self.imgTextMsg(articals)

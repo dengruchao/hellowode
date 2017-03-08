@@ -24,10 +24,10 @@ class WechatInterface:
             token = mc.get('token')
         return token
 
-    def addTempImg(self, filename):
+    def addTempMedia(self, filename, type):
         access_token = self.getAccessToken()
         url = "https://api.weixin.qq.com/cgi-bin/media/upload"
-        payload_img = {'access_token': access_token, 'type': 'image'}
+        payload_img = {'access_token': access_token, 'type': type}
         data = {'media': open(filename, 'rb')}
         resp = requests.post(url=url, params=payload_img, files=data)
         print resp.content
