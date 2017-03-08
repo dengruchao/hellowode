@@ -43,7 +43,7 @@ class WechatInterface:
         access_token = self.getAccessToken()
         url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=%s" % access_token
         data = {'type': type, 'offset': offset, 'count': count}
-        print data.type
+        print data['type']
         resp = requests.post(url=url, data=data)
         print resp.content
         if resp.status_code == 200:
