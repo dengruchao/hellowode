@@ -44,6 +44,7 @@ class WechatInterface:
         url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material"
         payload_img = {'access_token': access_token, 'type': type}
         resp = requests.post(url=url, params=payload_img)
+        print resp.content
         if resp.status_code == 200:
             resp_json = json.loads(resp.content)
             print resp_json['item']
