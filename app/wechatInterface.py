@@ -42,7 +42,7 @@ class WechatInterface:
     def getMediaList(self, type, offset=0, count=20):
         access_token = self.getAccessToken()
         url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material"
-        payload_img = {'access_token': access_token, 'type': type}
+        payload_img = {'access_token': access_token, 'type': type, 'offset': offset, 'count': count}
         resp = requests.post(url=url, data=payload_img)
         print resp.content
         if resp.status_code == 200:
