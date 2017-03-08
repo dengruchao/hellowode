@@ -26,6 +26,7 @@ class WechatInterface:
 
     def addTempMedia(self, filename, type):
         access_token = self.getAccessToken()
+        print access_token
         url = "https://api.weixin.qq.com/cgi-bin/media/upload"
         payload_img = {'access_token': access_token, 'type': type}
         data = {'media': open(filename, 'rb')}
