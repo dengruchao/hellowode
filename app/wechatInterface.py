@@ -45,6 +45,7 @@ class WechatInterface:
         payload_img = {'access_token': access_token}
         data = {'type': type, 'offset': offset, 'count': count}
         resp = requests.post(url=url, params=payload_img, data=data)
+        print resp.url
         print resp.content
         if resp.status_code == 200:
             resp_json = json.loads(resp.content)
