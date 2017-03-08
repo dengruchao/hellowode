@@ -15,7 +15,6 @@ class WechatInterface:
     def getAccessToken(self):
         mc = memcache.Client()
         token = mc.get('token')
-        token = None
         if token == None:
             print 'get access token'
             url = self.base_url.format(grant_type='client_credential', appid=self.appId, secret=self.secret)
@@ -27,10 +26,12 @@ class WechatInterface:
             token = mc.get('token')
         return token
 
-    def addTempMedia(self, filename, type):
+    def addMedia(self, filename, type, temp):
         access_token = self.getAccessToken()
-        print access_token
-        url = "https://api.weixin.qq.com/cgi-bin/media/upload"
+        if temp:
+            url = "https://api.weixin.qq.com/cgi-bin/media/upload"
+        else:
+            url = "https://api.weixin.qq.com/cgi-bin/material/add_material"
         payload_img = {'access_token': access_token, 'type': type}
         data = {'media': open(filename, 'rb')}
         resp = requests.post(url=url, params=payload_img, files=data)
