@@ -123,10 +123,8 @@ class Reply:
             elif content == u'音乐':
                 return self.musicMsg()
             elif content == u'二维码':
-                #media_id = wechatInterface.addMedia('app/static/qrcode.jpg', 'image', 0)
-                #return self.imageMsg(media_id)
-                wechatInterface.menuCreate()
-                return 'success'
+                media_id = wechatInterface.addMedia('app/static/qrcode.jpg', 'image', 0)
+                return self.imageMsg(media_id)
             elif content in meizitu.tag_list:
                 articals = meizitu.crawl(meizitu.tag_list.index(content))
                 return self.imgTextMsg(articals)
