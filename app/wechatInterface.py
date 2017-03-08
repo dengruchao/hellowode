@@ -24,6 +24,7 @@ class WechatInterface:
             expires_in = resp_json['expires_in']
             mc.set('token', access_token, expires_in)
             token = mc.get('token')
+        print token
         return token
 
     def addMedia(self, filename, type, temp):
