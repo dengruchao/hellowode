@@ -35,10 +35,19 @@ class WechatInterface:
         payload_img = {'access_token': access_token, 'type': type}
         data = {'media': open(filename, 'rb')}
         resp = requests.post(url=url, params=payload_img, files=data)
-        print resp.content
         if resp.status_code == 200:
             resp_json = json.loads(resp.content)
             return resp_json['media_id']
+
+    def getMediaList(self, type, offset=0, count=20):
+        access_token = self.getAccessToken()
+        url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material"
+        payload_img = {'access_token': access_token, 'type': type}
+        resp = requests.post(url=url, params=payload_img)
+        if resp.status_code == 200:
+            resp_json = json.loads(resp.content)
+            print resp_json['item']
+            return 'success'
 
     def menuCreate(self):
         access_token = self.getAccessToken()
