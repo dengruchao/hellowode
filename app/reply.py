@@ -125,7 +125,7 @@ class Reply:
             elif content == u'二维码':
                 #media_id = wechatInterface.addMedia('app/static/qrcode.jpg', 'image', 0)
                 #return self.imageMsg(media_id)
-                return wechatInterface.getMediaList('image')
+                return wechatInterface.getMediaList('image', 0, 1)
             elif content in meizitu.tag_list:
                 articals = meizitu.crawl(meizitu.tag_list.index(content))
                 return self.imgTextMsg(articals)
