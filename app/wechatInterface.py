@@ -6,8 +6,10 @@ import pylibmc as memcache
 class WechatInterface:
 
     def __init__(self):
-        self.appId = 'wx7e49057f2b9ea954'
-        self.secret = '37b4d4160ba04506f19958530c49a834'
+        #self.appId = 'wx7e49057f2b9ea954'
+        #self.secret = '37b4d4160ba04506f19958530c49a834'
+        self.appId = 'wx928c1d7848868b7e'
+        self.secret = '7200e771bf65a8a6145dee9372ddcd9e'
         self.base_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type={grant_type}&appid={appid}&secret={secret}'
 
     def getAccessToken(self):
