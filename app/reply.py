@@ -4,6 +4,7 @@ import time
 from wechatInterface import *
 from meizitu import *
 from talentapt import talentapt
+from music import music
 
 class Reply:
 
@@ -42,8 +43,8 @@ class Reply:
         response.content_type = 'application/xml'
         return response
 
-    def musicMsg(self):
-        link = 'http://music.163.com/#/song?id=436514312'
+    def musicMsg(self, link):
+        #link = 'http://music.163.com/#/song?id=436514312'
         xml_resp = '<xml>\
                     <ToUserName><![CDATA[%s]]></ToUserName>\
                     <FromUserName><![CDATA[%s]]></FromUserName>\
@@ -125,8 +126,8 @@ class Reply:
         if msgType == 'text':
             if content == u'文本':
                 return self.textMsg(content)
-            elif content == u'音乐':
-                return self.musicMsg()
+            elif content.find(u'音乐') != -1:
+                return self.musicMsg(music.getMusic(content.split(' ')[-1]))
             elif content == u'二维码':
                 print self.fromUserName
                 media_id = wechatInterface.addMedia('app/static/qrcode.jpg', 'image', 0)
