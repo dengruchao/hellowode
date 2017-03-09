@@ -132,7 +132,8 @@ class Reply:
                 return self.imgTextMsg(articals)
             elif content == u'人才公寓':
                 talentapt.login()
-                return 'success'
+                num = talentapt.getWaitingRecord()
+                return self.textMsg(num)
             else:
                 return self.tulingRobot(content)
         elif msgType == 'image':
