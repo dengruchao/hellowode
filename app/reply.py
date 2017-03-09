@@ -127,7 +127,9 @@ class Reply:
             if content == u'文本':
                 return self.textMsg(content)
             elif content.find(u'音乐') != -1:
-                return self.musicMsg(music.getMusic(content.split(' ')[-1]))
+                name = content.split(' ')[-1]
+                print name
+                return self.musicMsg(music.getMusic(name))
             elif content == u'二维码':
                 print self.fromUserName
                 media_id = wechatInterface.addMedia('app/static/qrcode.jpg', 'image', 0)
