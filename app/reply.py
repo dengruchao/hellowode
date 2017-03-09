@@ -128,7 +128,6 @@ class Reply:
                 return self.textMsg(content)
             elif content.find(u'音乐') != -1:
                 name = content.split(' ')[-1]
-                print name
                 return self.musicMsg(music.getMusic(name))
             elif content == u'二维码':
                 print self.fromUserName
