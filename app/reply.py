@@ -91,6 +91,11 @@ class Reply:
         return self.textMsg(content)
 
     def tulingRobot(self,content):
+        userid = 0
+        for chr in self.fromUserName:
+            userid += ord(chr)
+        print userid
+
         url = 'http://www.tuling123.com/openapi/api'
         data = {'key': 'db0b623ae0dd4e9ca28a89174abe156c', 'info': content, 'userid': '123456'}
         resp = requests.post(url, data=data)
