@@ -5,6 +5,7 @@ import sys
 
 class Music:
     def getMusic(self, name):
+        print type(name)
         name_urlcode = urllib.quote(name.decode(sys.stdin.encoding).encode('gbk'))
         url = 'http://music.163.com/#/search/m/?s=%s&type=1' % name_urlcode
         resp = requests.get(url)
