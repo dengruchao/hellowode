@@ -6,7 +6,7 @@ from lxml import etree
 
 class Music:
     def getMusic(self, name):
-        name_urlcode = urllib.quote(name)
+        name_urlcode = urllib.quote(name.encode('gbk'))
         print name_urlcode
         url = 'http://music.163.com/#/search/m/?s=%s&type=1' % name_urlcode
         resp = requests.get(url)
