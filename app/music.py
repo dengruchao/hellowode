@@ -1,7 +1,8 @@
+# -*- coding:utf-8 -*-
+
 import requests
 import urllib
 from lxml import etree
-import sys
 
 class Music:
     def getMusic(self, name):
