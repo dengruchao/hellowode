@@ -133,7 +133,8 @@ class Reply:
             elif content == u'人才公寓':
                 talentapt.login()
                 num = talentapt.getWaitingRecord()
-                return self.textMsg(num)
+                text = u'你申请的人才公寓目前排名%s' % num
+                return self.textMsg(text)
             else:
                 return self.tulingRobot(content)
         elif msgType == 'image':

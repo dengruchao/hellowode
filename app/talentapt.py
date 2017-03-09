@@ -10,11 +10,6 @@ class TalentApt:
     def login(self):
         url = 'http://www.zj-talentapt.com/Login.aspx?flag=0&userName=13166297263&passWord=ZHJjMzA2NDMz&md5=422fe37bc380cb48118133a7d17ae058'
         resp = self.session.get(url)
-        print resp.content
-        #login_url = 'http://www.zj-talentapt.com/ashx/ApiService.ashx?url=/users/login'
-        #data = {"systemId":"ht_02","mobilePhone":"13166297263","accountType":"1","password":"422fe37bc380cb48118133a7d17ae058"}
-        #resp = self.session.post(url=login_url, data=data)
-        #print resp.content
 
     def getWaitingRecord(self):
         url = 'http://www.zj-talentapt.com/System/WaitingRecord.aspx'
