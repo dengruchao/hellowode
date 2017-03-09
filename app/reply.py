@@ -43,7 +43,7 @@ class Reply:
         return response
 
     def musicMsg(self):
-        link = 'http://mascot-music.stor.sinaapp.com/zxmzf.mp3'
+        link = 'http://m10.music.126.net/20170309162216/801f5dd9e30f4308b01f8d6b838c15af/ymusic/fa90/df9c/59f7/95c4a2802e0b9191ae1a048f127e53c5.mp3'
         xml_resp = '<xml>\
                     <ToUserName><![CDATA[%s]]></ToUserName>\
                     <FromUserName><![CDATA[%s]]></FromUserName>\
@@ -90,7 +90,7 @@ class Reply:
         content = u'欢迎来到邓小超的微信公众号'
         return self.textMsg(content)
 
-    def tulingRobot(self,content):
+    def tulingRobot(self, content):
         userid = 0
         for chr in self.fromUserName:
             userid += ord(chr)
