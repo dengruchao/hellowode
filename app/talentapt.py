@@ -8,12 +8,11 @@ class TalentApt:
         self.session = requests.Session()
 
     def login(self):
+        #url = 'http://www.zj-talentapt.com/Login.aspx?flag=0&userName=13166297263&passWord=ZHJjMzA2NDMz&md5=422fe37bc380cb48118133a7d17ae058'
         login_url = 'http://www.zj-talentapt.com/ashx/ApiService.ashx?url=/users/login'
         data = {"systemId":"ht_02","mobilePhone":"13166297263","accountType":"1","password":"422fe37bc380cb48118133a7d17ae058"}
         resp = self.session.post(url=login_url, data=data)
-        resp_json = json.loads(resp.content)
-        if resp_json['code'] == 200:
-            print 'login successful'
+        print resp.content
 
     def getWaitingRecord(self):
         url = 'http://www.zj-talentapt.com/System/WaitingRecord.aspx'
