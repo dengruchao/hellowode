@@ -10,6 +10,7 @@ class Music:
         print name_urlcode
         url = 'http://music.163.com/#/search/m/?s=%s&type=1' % name_urlcode
         resp = requests.get(url)
+        print resp.text
         html = etree.HTML(resp.text)
         link = html.xpath('//*[@id="auto-id-cp8o3EiD60QqSENI"]/div/div/div[1]/div[2]/div/div/a/@href')[0]
         abs_link = url + link
