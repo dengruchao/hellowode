@@ -3,6 +3,7 @@ from flask import make_response
 import time
 from wechatInterface import *
 from meizitu import *
+from talentapt import talentapt
 
 class Reply:
 
@@ -129,6 +130,9 @@ class Reply:
             elif content in meizitu.tag_list:
                 articals = meizitu.crawl(meizitu.tag_list.index(content))
                 return self.imgTextMsg(articals)
+            elif content == u'人才公寓':
+                talentapt.login()
+                return 'success'
             else:
                 return self.tulingRobot(content)
         elif msgType == 'image':
