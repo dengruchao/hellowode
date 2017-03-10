@@ -31,6 +31,7 @@ class Location:
         if loc == None:
             return 'no data'
         my_loc = loc.get(self.openId, [])
+        print my_loc
 
         for i in range(len(my_loc)-1):
             point1 = my_loc[i]
