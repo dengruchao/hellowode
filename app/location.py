@@ -12,7 +12,11 @@ class Location:
         if loc == None:
             loc = {}
             mc.set('loc', loc)
-        loc[self.openId] = loc.get(self.openId, []).append([latitude, longitude])
+        try:
+            loc.get(self.openId).append([latitude, longitude])
+        except:
+            loc[self.openId] = []
+            loc.get(self.openId).append([latitude, longitude])
         mc.set('loc', loc)
 
     def draw(self):
