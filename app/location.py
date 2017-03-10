@@ -36,7 +36,7 @@ class Location:
         for i in range(len(my_loc)-1):
             point1 = my_loc[i]
             point2 = my_loc[i+1]
-            lat1, lon1, lat2, lon2 = map(radians, [point1[0], point1[1], point2[0], point2[1]])
+            lat1, lon1, lat2, lon2 = map(radians, [float(point1[0]), float(point1[1]), float(point2[0]), float(point2[1])])
             dlat = lat2 - lat1
             dlon = lon2 - lon1
             a = sin(dlat/2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon/2) ** 2
