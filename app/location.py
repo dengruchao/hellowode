@@ -54,5 +54,6 @@ class Location:
         if loc == None:
             return 'no data'
         loc[self.openId] = loc.get(self.openId, [])
+        loc[self.openId] = []
         mc.set('loc', loc)
 
