@@ -159,6 +159,7 @@ class Reply:
             return self.imageMsg(media_id)
         elif msgType == 'event':
             event = xml_recv.find('Event').text
+            return self.textMsg(event)
             if event == 'subscribe':
                 return self.subscribe()
             elif event == 'LOCATION':
