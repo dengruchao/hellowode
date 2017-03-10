@@ -134,7 +134,7 @@ class Reply:
         self.toUserName = xml_recv.find('ToUserName').text
         self.fromUserName = xml_recv.find('FromUserName').text
         msgType = xml_recv.find('MsgType').text
-        print xml_recv
+        print msgType
         if msgType == 'text':
             text = xml_recv.find('Content').text
             if text == u'文本':
