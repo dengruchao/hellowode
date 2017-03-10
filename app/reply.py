@@ -8,6 +8,7 @@ from interface import Interface
 from meizitu import Meizitu
 from talentapt import TalentApt
 from music import Music
+from location import Location
 
 class Reply:
 
@@ -18,6 +19,7 @@ class Reply:
         self.meizitu = Meizitu()
         self.talentapt = TalentApt()
         self.music = Music()
+        self.location = Location()
 
     def menu(self):
         content = u'你好，我现在还不知道怎么处理这个消息'
@@ -143,6 +145,10 @@ class Reply:
                 return self.musicMsg(self.music.getMusic(name))
             elif text == u'二维码':
                 media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
+                return self.imageMsg(media_id)
+            elif text == u'轨迹':
+                self.location.draw()
+                media_id = self.interface.addMedia('app/static/trace.jpg', 'image', 0)
                 return self.imageMsg(media_id)
             elif text in self.meizitu.tag_list:
                 articals = self.meizitu.crawl(self.meizitu.tag_list.index(text))
