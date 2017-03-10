@@ -2,8 +2,7 @@
 from app import app
 from flask import request, make_response
 import hashlib
-import xml.etree.ElementTree as ET
-from reply import reply
+from reply import Reply
 
 @app.route('/', methods = ['GET', 'POST'])
 def wechat_auth():
@@ -26,16 +25,7 @@ def wechat_auth():
         else:
             return 'Hello World'
     else:
-        rec = request.stream.read()
-        xml_recv = ET.fromstring(rec)
-        reply.toUserName = xml_recv.find('ToUserName').text
-        reply.fromUserName = xml_recv.find('FromUserName').text
-        msgType = xml_recv.find('MsgType').text
-        if msgType == 'text':
-            content = xml_recv.find('Content').text
-        elif msgType == 'image':
-            content = xml_recv.find('MediaId').text
-        elif msgType == 'event':
-            content = xml_recv.find('Event').text
-        return reply.dispatch(msgType, content)
+        recv = request.stream.read()
+        reply = Reply()
+        return reply.dispatch(recv)
 

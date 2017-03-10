@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 from flask import make_response
+import xml.etree.ElementTree as ET
 import time
-from wechatInterface import *
-from meizitu import *
-from talentapt import talentapt
-from music import music
+import json
+import requests
+from interface import Interface
+from meizitu import Meizitu
+from talentapt import TalentApt
+from music import Music
 
 class Reply:
 
     def __init__(self):
         self.fromUserName = None
         self.toUserName = None
+        self.interface = Interface()
+        self.meizitu = Meizitu()
+        self.talentapt = TalentApt()
+        self.music = Music()
 
     def menu(self):
         content = u'你好，我现在还不知道怎么处理这个消息'
@@ -122,33 +129,41 @@ class Reply:
                     break
             return self.imgTextMsg(item_list)
 
-    def dispatch(self, msgType, content):
+    def dispatch(self, recv):
+        xml_recv = ET.fromstring(recv)
+        self.toUserName = xml_recv.find('ToUserName').text
+        self.fromUserName = xml_recv.find('FromUserName').text
+        msgType = xml_recv.find('MsgType').text
         if msgType == 'text':
-            if content == u'文本':
-                return self.textMsg(content)
-            elif content.find(u'音乐') != -1:
-                name = content.split(' ')[-1]
-                return self.musicMsg(music.getMusic(name))
-            elif content == u'二维码':
-                print self.fromUserName
-                media_id = wechatInterface.addMedia('app/static/qrcode.jpg', 'image', 0)
-                return self.imageMsg(media_id)
-            elif content in meizitu.tag_list:
-                articals = meizitu.crawl(meizitu.tag_list.index(content))
-                return self.imgTextMsg(articals)
-            elif content == u'人才公寓':
-                talentapt.login()
-                num = talentapt.getWaitingRecord()
-                text = u'你申请的人才公寓目前排队人数%s' % num
+            text = xml_recv.find('Content').text
+            if text == u'文本':
                 return self.textMsg(text)
+            elif text.find(u'音乐') != -1:
+                name = text.split(' ')[-1]
+                return self.musicMsg(self.music.getMusic(name))
+            elif text == u'二维码':
+                media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
+                return self.imageMsg(media_id)
+            elif text in self.meizitu.tag_list:
+                articals = self.meizitu.crawl(self.meizitu.tag_list.index(text))
+                return self.imgTextMsg(articals)
+            elif text == u'人才公寓':
+                self.talentapt.login()
+                num = self.talentapt.getWaitingRecord()
+                text_reply = u'你申请的人才公寓目前排队人数%s' % num
+                return self.textMsg(text_reply)
             else:
-                return self.tulingRobot(content)
+                return self.tulingRobot(text)
         elif msgType == 'image':
-            return self.imageMsg(content)
+            media_id = xml_recv.find('MediaId').text
+            return self.imageMsg(media_id)
         elif msgType == 'event':
-            return self.subscribe()
+            event = xml_recv.find('Event').text
+            if event == 'subscribe':
+                return self.subscribe()
+            elif event == 'LOCATION':
+                return self.textMsg('success')
         else:
             return self.menu()
 
-reply = Reply()
 

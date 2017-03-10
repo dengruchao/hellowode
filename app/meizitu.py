@@ -42,4 +42,3 @@ class Meizitu:
             articals.append([name, name, link_img, link])
         return articals
 
-meizitu = Meizitu()

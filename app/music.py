@@ -17,4 +17,3 @@ class Music:
         print abs_link
         return abs_link
 
-music = Music()

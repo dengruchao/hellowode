@@ -17,4 +17,3 @@ class TalentApt:
         num = html.xpath('//*[@id="ctl00_ctl00_ctl00_main_main_main_rptApplyRecord_ctl00_labPageRank"]/text()')[0]
         return num
 
-talentapt = TalentApt()

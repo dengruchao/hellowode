@@ -3,7 +3,7 @@ import requests
 import json
 import pylibmc as memcache
 
-class WechatInterface:
+class Interface:
 
     def __init__(self):
         #self.appId = 'wx7e49057f2b9ea954'
@@ -85,4 +85,3 @@ class WechatInterface:
         if resp.status_code == 200:
             print resp.content
 
-wechatInterface = WechatInterface()
