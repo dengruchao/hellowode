@@ -1,17 +1,53 @@
 import matplotlib.pyplot as plt
+import pylibmc as memcache
+from math import radians, sin, cos, asin, sqrt
 
 class Location:
-    def __init__(self):
-        self.latitudeList = [31.19, 40.28, 50.63]
-        self.longitudeList = [121.577, 130.577, 140.588]
+    def __init__(self, openId):
+        self.openId = openId
 
     def addPoint(self, latitude, longitude):
-        self.latitudeList.append(latitude)
-        self.longitudeList.append(longitude)
+        mc = memcache.Client()
+        loc = mc.get('loc')
+        if loc == None:
+            loc = {}
+            mc.set('loc', loc)
+        loc[self.openId] = loc.get(self.openId, []).append([latitude, longitude])
+        mc.set('loc', loc)
 
     def draw(self):
         plt.xlabel('latitude')
         plt.ylabel('longitude')
         plt.plot(self.latitudeList, self.longitudeList)
-        plt.show()
-        plt.savefig('app/static/trace.jpg')
+        #plt.savefig('app/static/trace.jpg')
+
+    def calDistance(self):
+        mc = memcache.Client()
+        loc = mc.get('loc')
+        if loc == None:
+            return 'no data'
+        my_loc = loc.get(self.openId, [])
+
+        for i in range(len(my_loc)-1):
+            point1 = my_loc[i]
+            point2 = my_loc[i+1]
+            lat1, lon1, lat2, lon2 = map(radians, [point1[0], point1[1], point2[0], point2[2]])
+            dlat = lat2 - lat1
+            dlon = lon2 - lon1
+            a = sin(dlat/2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon/2) ** 2
+            c = 2 * asin(sqrt(a))
+            r = 6378.137
+            s = c * r
+            if s < 0:
+                return str(-s)
+            else:
+                return str(s)
+
+    def cleanAllPoints(self):
+        mc = memcache.Client()
+        loc = mc.get('loc')
+        if loc == None:
+            return 'no data'
+        loc[self.openId] = loc.get(self.openId, [])
+        mc.set('loc', loc)
+

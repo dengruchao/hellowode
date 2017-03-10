@@ -12,14 +12,14 @@ from location import Location
 
 class Reply:
 
-    def __init__(self):
+    def __init__(self, fromUserName):
         self.fromUserName = None
         self.toUserName = None
         self.interface = Interface()
         self.meizitu = Meizitu()
         self.talentapt = TalentApt()
         self.music = Music()
-        self.location = Location()
+        self.location = Location(fromUserName)
 
     def menu(self):
         content = u'你好，我现在还不知道怎么处理这个消息'
@@ -146,10 +146,9 @@ class Reply:
             elif text == u'二维码':
                 media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
                 return self.imageMsg(media_id)
-            elif text == u'轨迹':
-                self.location.draw()
-                media_id = self.interface.addMedia('app/static/trace.jpg', 'image', 0)
-                return self.imageMsg(media_id)
+            elif text == u'距离':
+                distance = self.location.calDistance()
+                return self.textMsg(distance)
             elif text in self.meizitu.tag_list:
                 articals = self.meizitu.crawl(self.meizitu.tag_list.index(text))
                 return self.imgTextMsg(articals)
@@ -172,6 +171,7 @@ class Reply:
                 longitude = xml_recv.find('Longitude').text
                 precision = xml_recv.find('Precision').text
                 print latitude, longitude, precision
+                self.location.addPoint(latitude, longitude)
                 return 'success'
         else:
             return self.menu()

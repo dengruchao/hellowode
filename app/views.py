@@ -3,6 +3,7 @@ from app import app
 from flask import request, make_response
 import hashlib
 from reply import Reply
+import xml.etree.ElementTree as ET
 
 @app.route('/', methods = ['GET', 'POST'])
 def wechat_auth():
@@ -26,6 +27,8 @@ def wechat_auth():
             return 'Hello World'
     else:
         recv = request.stream.read()
-        reply = Reply()
+        xml_recv = ET.fromstring(recv)
+        fromUserName = xml_recv.find('FromUserName').text
+        reply = Reply(fromUserName)
         return reply.dispatch(recv)
 
