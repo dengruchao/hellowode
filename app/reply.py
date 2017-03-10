@@ -134,6 +134,7 @@ class Reply:
         self.toUserName = xml_recv.find('ToUserName').text
         self.fromUserName = xml_recv.find('FromUserName').text
         msgType = xml_recv.find('MsgType').text
+        print msgType
         if msgType == 'text':
             text = xml_recv.find('Content').text
             if text == u'文本':
@@ -159,7 +160,6 @@ class Reply:
             return self.imageMsg(media_id)
         elif msgType == 'event':
             event = xml_recv.find('Event').text
-            return self.textMsg(event)
             if event == 'subscribe':
                 return self.subscribe()
             elif event == 'LOCATION':
