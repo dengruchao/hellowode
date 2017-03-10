@@ -9,6 +9,7 @@ from meizitu import Meizitu
 from talentapt import TalentApt
 from music import Music
 from location import Location
+import pylibmc as memcache
 
 class Reply:
 
@@ -146,7 +147,12 @@ class Reply:
             elif text == u'二维码':
                 media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
                 return self.imageMsg(media_id)
+            elif text == u'开始跑步':
+                mc = memcache.Client()
+                mc.set('running', True)
             elif text == u'结束跑步':
+                mc = memcache.Client()
+                mc.set('running', False)
                 distance = self.location.calDistance()
                 self.location.cleanAllPoints()
                 return self.textMsg(distance)
@@ -168,11 +174,14 @@ class Reply:
             if event == 'subscribe':
                 return self.subscribe()
             elif event == 'LOCATION':
-                latitude = xml_recv.find('Latitude').text
-                longitude = xml_recv.find('Longitude').text
-                precision = xml_recv.find('Precision').text
-                print latitude, longitude, precision
-                self.location.addPoint(latitude, longitude)
+                mc = memcache.Client()
+                running = mc.get('running')
+                if running:
+                    latitude = xml_recv.find('Latitude').text
+                    longitude = xml_recv.find('Longitude').text
+                    precision = xml_recv.find('Precision').text
+                    print latitude, longitude, precision
+                    self.location.addPoint(latitude, longitude)
                 return 'success'
         else:
             return self.menu()
