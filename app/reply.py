@@ -146,8 +146,9 @@ class Reply:
             elif text == u'二维码':
                 media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
                 return self.imageMsg(media_id)
-            elif text == u'距离':
+            elif text == u'结束跑步':
                 distance = self.location.calDistance()
+                self.location.cleanAllPoints()
                 return self.textMsg(distance)
             elif text in self.meizitu.tag_list:
                 articals = self.meizitu.crawl(self.meizitu.tag_list.index(text))
