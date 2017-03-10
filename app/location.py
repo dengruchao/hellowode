@@ -13,4 +13,5 @@ class Location:
         plt.xlabel('latitude')
         plt.ylabel('longitude')
         plt.plot(self.latitudeList, self.longitudeList)
+        plt.show()
         plt.savefig('app/static/trace.jpg')
