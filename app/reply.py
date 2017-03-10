@@ -150,6 +150,7 @@ class Reply:
             elif text == u'开始跑步':
                 mc = memcache.Client()
                 mc.set('running', True)
+                return self.textMsg('奔跑吧，小伙')
             elif text == u'结束跑步':
                 mc = memcache.Client()
                 mc.set('running', False)
