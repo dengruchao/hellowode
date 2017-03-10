@@ -159,11 +159,14 @@ class Reply:
             return self.imageMsg(media_id)
         elif msgType == 'event':
             event = xml_recv.find('Event').text
-            print event
             if event == 'subscribe':
                 return self.subscribe()
             elif event == 'LOCATION':
-                return self.textMsg('success')
+                latitude = xml_recv.find('Latitude').text
+                longitude = xml_recv.find('Longitude').text
+                precision = xml_recv.find('Precision').text
+                print latitude, longitude, precision
+                return 'success'
         else:
             return self.menu()
 
