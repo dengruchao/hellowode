@@ -15,6 +15,7 @@ class TalentApt:
                 'url': '/users/login'
                 }
         resp = self.session.post(url, data=payload)
+        print resp
 
     def getWaitingRecord(self):
         #url = 'http://www.zj-talentapt.com/System/WaitingRecord.aspx'
