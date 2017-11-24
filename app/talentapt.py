@@ -21,6 +21,7 @@ class TalentApt:
         url = 'http://rcgy.zjhui.net/System/WaitingRecord.aspx'
         resp = self.session.get(url)
         html = etree.HTML(resp.text)
+        print resp.text
         num = html.xpath('//*[@id="ctl00_ctl00_ctl00_main_main_main_rptApplyRecord_ctl00_labPageRank"]/text()')[0]
         return num
 
