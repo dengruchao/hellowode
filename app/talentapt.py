@@ -14,7 +14,7 @@ class TalentApt:
                 'data': {"systemId":"ht_02","mobilePhone":"13166297263","accountType":"1","password":"422fe37bc380cb48118133a7d17ae058"},
                 'url': '/users/login'
                 }
-        resp = self.session.get(url, params=payload)
+        resp = self.session.post(url, data=payload)
 
     def getWaitingRecord(self):
         #url = 'http://www.zj-talentapt.com/System/WaitingRecord.aspx'
