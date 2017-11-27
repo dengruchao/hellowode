@@ -22,7 +22,7 @@ class TalentApt:
                 'Connection':'keep-alive',
                 'Content-Length':'160',
                 'Content-Type':'application/json; charset=UTF-8',
-                'Cookie':'ASP.NET_SessionId=bqxhku45xisqr445bnrxld2n',
+                #'Cookie':'ASP.NET_SessionId=bqxhku45xisqr445bnrxld2n',
                 'Host':'rcgy.zjhui.net',
                 'Origin':'http://rcgy.zjhui.net',
                 'Referer':'http://rcgy.zjhui.net/',
@@ -32,6 +32,10 @@ class TalentApt:
         resp = self.session.post(url, headers=self.headers, data=json.dumps(payload))
         url ='http://rcgy.zjhui.net/Login.aspx?flag=0&userName=13166297263&passWord=ZHJjMzA2NDMz&md5=422fe37bc380cb48118133a7d17ae058'
         resp = self.session.get(url)
+        if resp.url == 'http://rcgy.zjhui.net/Default.aspx':
+            print 'login successful'
+        else:
+            print 'login failed', resp.url
 
     def getWaitingRecord(self):
         #url = 'http://www.zj-talentapt.com/System/WaitingRecord.aspx'
@@ -41,7 +45,7 @@ class TalentApt:
                 'Accept-Encoding':'gzip, deflate',
                 'Accept-Language':'zh-CN,zh;q=0.9',
                 'Connection':'keep-alive',
-                'Cookie':'ASP.NET_SessionId=bqxhku45xisqr445bnrxld2n',
+                #'Cookie':'ASP.NET_SessionId=bqxhku45xisqr445bnrxld2n',
                 'Host':'rcgy.zjhui.net',
                 'Referer':'http://rcgy.zjhui.net/System/ApplyRecord.aspx',
                 'Upgrade-Insecure-Requests':'1',
