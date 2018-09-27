@@ -29,7 +29,7 @@ class TalentApt:
                 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
                 'X-Requested-With':'XMLHttpRequest',
                 }
-        resp = self.session.post(url, headers=self.headers, data=json.dumps(payload))
+        resp = self.session.post(url, headers=self.headers, data=json.dumps(payload), verify=False)
         url ='http://rcgy.zjhui.net/Login.aspx?flag=0&userName=13166297263&passWord=ZHJjMzA2NDMz&md5=422fe37bc380cb48118133a7d17ae058'
         resp = self.session.get(url)
         if resp.url == 'http://rcgy.zjhui.net/Default.aspx':
