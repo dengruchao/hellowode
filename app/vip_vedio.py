@@ -26,8 +26,6 @@ class VipVideo:
             return u'输入有误！'
         url = 'https://v.qq.com/x/search/?q=%s&stag=0&smartbox_ab=' % name
         r = requests.get(url)
-        with open('test.html', 'w') as f:
-            f.write(r.content)
         html = etree.HTML(r.content)
         playlist = html.xpath('//div[@class="_playlist"]')[0]
         self.episode_urls = playlist.xpath('descendant::div[@class="item"]/a/@href')
@@ -46,4 +44,6 @@ class VipVideo:
 
 if __name__ == '__main__':
     vv = VipVideo()
-    print vv.free_url(u'杀不死 2')
+    s = u'vip视频 杀不死 2'
+    print vv.free_url(s[5:])
+    #print vv.free_url(u'杀不死 2')
