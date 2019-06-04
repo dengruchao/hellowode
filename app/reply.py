@@ -168,7 +168,7 @@ class Reply:
                 text_reply = u'你申请的人才公寓目前排队人数%s' % num
                 return self.textMsg(text_reply)
             elif text[0:5] == u'vip视频':
-                return self.vip_vedio.free_url(text[5:])
+                return self.textMsg(self.vip_vedio.free_url(text[5:]))
             else:
                 return self.tulingRobot(text)
         elif msgType == 'image':
