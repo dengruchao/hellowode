@@ -38,12 +38,9 @@ class VipVideo:
         data = ''
         for i, api in enumerate(self.api_list):
             data += u"线路%d: %s\n" % (i+1, api+vip_url)
-        data += u'建议使用线路1\n'
         return data
 
 
 if __name__ == '__main__':
     vv = VipVideo()
-    s = u'vip视频 杀不死 2'
-    print vv.free_url(s[5:])
-    #print vv.free_url(u'杀不死 2')
+    print vv.free_url(u'杀不死 2')
