@@ -10,6 +10,7 @@ from talentapt import TalentApt
 from music import Music
 from location import Location
 import pylibmc as memcache
+from vip_vedio import VipVideo
 
 class Reply:
 
@@ -21,6 +22,7 @@ class Reply:
         self.talentapt = TalentApt()
         self.music = Music()
         self.location = Location(fromUserName)
+        self.vip_vedio = VipVideo()
 
     def menu(self):
         content = u'你好，我现在还不知道怎么处理这个消息'
@@ -165,6 +167,8 @@ class Reply:
                 num = self.talentapt.getWaitingRecord()
                 text_reply = u'你申请的人才公寓目前排队人数%s' % num
                 return self.textMsg(text_reply)
+            elif text[0:5] == u'vip视频':
+                return self.vip_vedio.free_url(text[5:])
             else:
                 return self.tulingRobot(text)
         elif msgType == 'image':
