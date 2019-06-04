@@ -16,25 +16,27 @@ class VipVideo:
         # video_url = 'https://v.qq.com/x/cover/e0jts33la7wbnfk/m00240ny61l.html'
 
     def tencent(self, user_input):
-        match = re.match('^(.+?)\s+(\d*)\s*$', user_input)
+        match = re.match('^(.+?)\s*(\d*)\s*$', user_input)
         if match is None:
-            return u'输入有误！'
+            return None, u'输入有误！'
         name = match.group(1).strip()
         try:
             episode_num = int(match.group(2).strip())
         except ValueError:
-            return u'输入有误！'
+            episode_num = 1
         url = 'https://v.qq.com/x/search/?q=%s&stag=0&smartbox_ab=' % name
         r = requests.get(url)
         html = etree.HTML(r.content)
         playlist = html.xpath('//div[@class="_playlist"]')[0]
-        self.episode_urls = playlist.xpath('descendant::div[@class="item"]/a/@href')
-        if episode_num > len(self.episode_urls)-1:
-            return u'没有这一集！'
-        return self.episode_urls[episode_num]
+        self.episode_urls = playlist.xpath('descendant::div/a/@href')
+        if episode_num==0 or episode_num > len(self.episode_urls):
+            return None, u'没有这一集！'
+        return 1, self.episode_urls[episode_num-1]
 
     def free_url(self, user_input):
-        vip_url = self.tencent(user_input)
+        success, vip_url = self.tencent(user_input)
+        if success is None:
+            return vip_url
         data = ''
         for i, api in enumerate(self.api_list):
             data += u"线路%d:\n%s\n\n" % (i+1, api+vip_url)
@@ -44,4 +46,4 @@ class VipVideo:
 
 if __name__ == '__main__':
     vv = VipVideo()
-    print vv.free_url(u'杀不死 2')
+    print vv.free_url(u'风语咒')
