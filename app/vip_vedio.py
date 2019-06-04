@@ -37,7 +37,8 @@ class VipVideo:
         vip_url = self.tencent(user_input)
         data = ''
         for i, api in enumerate(self.api_list):
-            data += u"线路%d: %s\n" % (i+1, api+vip_url)
+            data += u"线路%d:\n%s\n\n" % (i+1, api+vip_url)
+        data = data.strip()
         return data
 
 
