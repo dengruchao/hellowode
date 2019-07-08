@@ -2,6 +2,8 @@
 import requests
 from lxml import etree
 import json
+import hashlib
+import base64
 
 class TalentApt:
     def __init__(self):
@@ -30,7 +32,11 @@ class TalentApt:
         #         'X-Requested-With':'XMLHttpRequest',
         #         }
         # resp = self.session.post(url, headers=self.headers, data=json.dumps(payload), verify=False)
-        url ='http://rcgy.zjhui.net/Login.aspx?flag=0&userName=18616896564&passWord=ZHJjMzA2NDMz&md5=422fe37bc380cb48118133a7d17ae058'
+        username = '17521084212'
+        password = 'qwer1234'
+        password_base64 = base64.b64encode(password)
+        password_md5    = hashlib.md5(password).hexdigest()
+        url ='http://rcgy.zjhui.net/Login.aspx?flag=0&userName=%s&passWord=%s&md5=%s' % (username, password_base64, password_md5)
         resp = self.session.get(url, verify=False)
         if resp.url == 'https://rcgy.zjhui.net/Default.aspx':
             print 'login successful'
