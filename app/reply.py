@@ -165,7 +165,7 @@ class Reply:
             elif text == u'人才公寓':
                 self.talentapt.login()
                 num = self.talentapt.getWaitingRecord()
-                text_reply = u'你申请的人才公寓目前排队人数%s' % num
+                text_reply = u'当前排名: %s' % num
                 return self.textMsg(text_reply)
             elif text[0:5] == u'vip视频':
                 return self.textMsg(self.vip_vedio.free_url(text[5:]))
