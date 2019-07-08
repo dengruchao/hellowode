@@ -60,7 +60,7 @@ class TalentApt:
         resp = self.session.get(url, headers=self.headers)
         html = etree.HTML(resp.text)
         num = html.xpath('//span[@id="ctl00_ctl00_ctl00_main_main_main_rptPtApplyRecord_ctl00_labPageRank"]/text()')[0]
-        checked = html.xpath('//*[@id="ctl00_ctl00_ctl00_main_main_main_palPT"]/table/tbody/tr[2]/td[9]/b/text()')[0]
+        checked = html.xpath('//*[@id="ctl00_ctl00_ctl00_main_main_main_palPT"]/table/tbody/tr[2]/td[9]/text()')[0].strip()
         return num, checked
 
 if __name__ == '__main__':
