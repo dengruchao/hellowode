@@ -164,8 +164,8 @@ class Reply:
                 return self.imgTextMsg(articals)
             elif text == u'人才公寓':
                 self.talentapt.login()
-                num = self.talentapt.getWaitingRecord()
-                text_reply = u'当前排名: %s' % num
+                num, checked = self.talentapt.getWaitingRecord()
+                text_reply = u'企业审核: %s\n当前排名: %s' % (checked, num)
                 return self.textMsg(text_reply)
             elif text[0:5] == u'vip视频':
                 return self.textMsg(self.vip_vedio.free_url(text[5:]))
