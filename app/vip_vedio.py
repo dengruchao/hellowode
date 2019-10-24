@@ -11,6 +11,7 @@ class VipVideo:
     def __init__(self):
         self.api_list = (
             'http://api.ledboke.com/vip/?url=',
+            'http://api.ledboke.com/?v=',
             'http://17kyun.com/api.php?url=',
         )
         # video_url = 'https://v.qq.com/x/cover/e0jts33la7wbnfk/m00240ny61l.html'
@@ -46,4 +47,4 @@ class VipVideo:
 
 if __name__ == '__main__':
     vv = VipVideo()
-    print vv.free_url(u'风语咒')
+    print vv.free_url(u'伪装大师')
