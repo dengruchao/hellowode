@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import json
-import pylibmc as memcache
+# import pylibmc as memcache
 
 class Interface:
 
@@ -13,6 +13,7 @@ class Interface:
         self.base_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type={grant_type}&appid={appid}&secret={secret}'
 
     def getAccessToken(self):
+        return ''
         mc = memcache.Client()
         token = mc.get('token')
         if token == None:
