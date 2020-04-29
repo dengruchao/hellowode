@@ -167,8 +167,13 @@ class Music:
         self.api = MusicAPI()
 
     def getMusic(self, name):
-        mp3_id = self.api.get_music_list(name)[0]['id']
-        return self.api.get_mp3(mp3_id)
+        song = self.api.get_music_list(name)[0]
+        song_id = song['id']
+        song_name = song['name']
+        singer = song['ar'][0]['name']
+        mp3 = self.api.get_mp3(song_id)
+
+        return mp3, song_name, singer
 
 
 if __name__ == '__main__':

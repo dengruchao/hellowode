@@ -55,7 +55,7 @@ class Reply:
         response.content_type = 'application/xml'
         return response
 
-    def musicMsg(self, link):
+    def musicMsg(self, link, name, singer):
         #link = 'http://music.163.com/#/song?id=436514312'
         xml_resp = '<xml>\
                     <ToUserName><![CDATA[%s]]></ToUserName>\
@@ -69,7 +69,7 @@ class Reply:
                     <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>\
                     </Music>\
                     </xml>'
-        response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), u'最炫民族风', u'歌手：凤凰传奇', link, link))
+        response = make_response(xml_resp % (self.fromUserName, self.toUserName, str(int(time.time())), name, u'歌手：%s'%singer, link, link))
         response.content_type = 'application/xml'
         return response
 
