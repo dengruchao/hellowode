@@ -148,8 +148,8 @@ class Reply:
                 link, name, singer = self.music.getMusic(name)
                 return self.musicMsg(link, name, singer)
             elif text == u'二维码':
-                media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
-                return self.imageMsg(media_id)
+                # media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
+                return self.imageMsg('a7Zzsef34bHTIphJVVhcc2fFZxqCt6gZO3HSuGHtu68')
             elif text == u'开始跑步':
                 # mc = memcache.Client()
                 # mc.set('running', True)
