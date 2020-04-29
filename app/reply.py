@@ -145,7 +145,8 @@ class Reply:
                 return self.textMsg(text)
             elif text.find(u'音乐') != -1:
                 name = text.split(' ')[-1]
-                return self.musicMsg(self.music.getMusic(name))
+                link, name, singer = self.music.getMusic(name)
+                return self.musicMsg(link, name, singer)
             elif text == u'二维码':
                 media_id = self.interface.addMedia('app/static/qrcode.jpg', 'image', 0)
                 return self.imageMsg(media_id)
