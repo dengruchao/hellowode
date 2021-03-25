@@ -9,7 +9,7 @@ lxml==4.5.0
 MarkupSafe==1.1.1
 Naked==0.1.31
 pycrypto==2.6.1
-PyYAML==5.3.1
+PyYAML==5.4
 requests==2.23.0
 shellescape==3.8.1
 urllib3==1.25.9
